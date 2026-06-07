@@ -1,0 +1,131 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lyhyka.DBCore
+{
+    public class CarBrand
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public float WeightMin1 { get; set; }
+        public float WeightMin2 { get; set; }
+        public float WeightMin3 { get; set; }
+        public float WeightMin4 { get; set; }
+        public float WeightMin5 { get; set; }
+        public float SpeedMin { get; set; }
+        public float SlideSlipMin { get; set; }
+        public float WhistleMin { get; set; }
+        public float NoiseMin { get; set; }
+        public float BrakeForceRightMin1 { get; set; }
+        public float BrakeForceRightMin2 { get; set; }
+        public float BrakeForceRightMin3 { get; set; }
+        public float BrakeForceRightMin4 { get; set; }
+        public float BrakeForceRightMin5 { get; set; }
+        public float BrakeForceLeftMin1 { get; set; }
+        public float BrakeForceLeftMin2 { get; set; }
+        public float BrakeForceLeftMin3 { get; set; }
+        public float BrakeForceLeftMin4 { get; set; }
+        public float BrakeForceLeftMin5 { get; set; }
+        public float BrakeForceHandLeftMin1 { get; set; }
+        public float BrakeForceHandLeftMin2 { get; set; }
+        public float BrakeForceHandLeftMin3 { get; set; }
+        public float BrakeForceHandLeftMin4 { get; set; }
+        public float BrakeForceHandLeftMin5 { get; set; }
+        public float BrakeForceHandRightMin1 { get; set; }
+        public float BrakeForceHandRightMin2 { get; set; }
+        public float BrakeForceHandRightMin3 { get; set; }
+        public float BrakeForceHandRightMin4 { get; set; }
+        public float BrakeForceHandRightMin5 { get; set; }
+        public float FarLeftLightIntensityMin { get; set; }
+        public float FarLeftLightDeviationUDMin { get; set; }
+        public float FarLeftLightDeviationLRMin { get; set; }
+        public float FarRightLightIntensityMin { get; set; }
+        public float FarRightLightDeviationUDMin { get; set; }
+        public float FarRightLightDeviationLRMin { get; set; }
+        public float NearLeftLightIntensityMin { get; set; }
+        public float NearLeftLightDeviationUDMin { get; set; }
+        public float NearLeftLightDeviationLRMin { get; set; }
+        public float NearRightLightIntensityMin { get; set; }
+        public float NearRightLightDeviationUDMin { get; set; }
+        public float NearRightLightDeviationLRMin { get; set; }
+        public float HCMin { get; set; }
+        public float COMin { get; set; }
+        public float CO2Min { get; set; }
+        public float O2Min { get; set; }
+        public float NOMin { get; set; }
+        public float OTMin { get; set; }
+        public float RPMMin { get; set; }
+        public float MinSpeedMin1 { get; set; }
+        public float MinSpeedMin2 { get; set; }
+        public float MinSpeedMin3 { get; set; }
+        public float MaxSpeedMin1 { get; set; }
+        public float MaxSpeedMin2 { get; set; }
+        public float MaxSpeedMin3 { get; set; }
+        public float HsuMin1 { get; set; }
+        public float HsuMin2 { get; set; }
+        public float HsuMin3 { get; set; }
+        public float AvgHsuMin { get; set; }
+        public float OilTemperatureMin { get; set; }
+        public float SmokeOpacityMin { get; set; }
+        public float WeightMax1 { get; set; }
+        public float WeightMax2 { get; set; }
+        public float WeightMax3 { get; set; }
+        public float WeightMax4 { get; set; }
+        public float WeightMax5 { get; set; }
+        public float SpeedMax { get; set; }
+        public float SlideSlipMax { get; set; }
+        public float WhistleMax { get; set; }
+        public float NoiseMax { get; set; }
+        public float BrakeForceRightMax1 { get; set; }
+        public float BrakeForceRightMax2 { get; set; }
+        public float BrakeForceRightMax3 { get; set; }
+        public float BrakeForceRightMax4 { get; set; }
+        public float BrakeForceRightMax5 { get; set; }
+        public float BrakeForceLeftMax1 { get; set; }
+        public float BrakeForceLeftMax2 { get; set; }
+        public float BrakeForceLeftMax3 { get; set; }
+        public float BrakeForceLeftMax4 { get; set; }
+        public float BrakeForceLeftMax5 { get; set; }
+        public float BrakeForceHandLeftMax1 { get; set; }
+        public float BrakeForceHandLeftMax2 { get; set; }
+        public float BrakeForceHandLeftMax3 { get; set; }
+        public float BrakeForceHandLeftMax4 { get; set; }
+        public float BrakeForceHandLeftMax5 { get; set; }
+        public float BrakeForceHandRightMax1 { get; set; }
+        public float BrakeForceHandRightMax2 { get; set; }
+        public float BrakeForceHandRightMax3 { get; set; }
+        public float BrakeForceHandRightMax4 { get; set; }
+        public float BrakeForceHandRightMax5 { get; set; }
+        public float FarLeftLightIntensityMax { get; set; }
+        public float FarLeftLightDeviationUDMax { get; set; }
+        public float FarLeftLightDeviationLRMax { get; set; }
+        public float FarRightLightIntensityMax { get; set; }
+        public float FarRightLightDeviationUDMax { get; set; }
+        public float FarRightLightDeviationLRMax { get; set; }
+        public float NearLeftLightIntensityMax { get; set; }
+        public float NearLeftLightDeviationUDMax { get; set; }
+        public float NearLeftLightDeviationLRMax { get; set; }
+        public float NearRightLightIntensityMax { get; set; }
+        public float NearRightLightDeviationUDMax { get; set; }
+        public float NearRightLightDeviationLRMax { get; set; }
+        public float HCMax { get; set; }
+        public float COMax { get; set; }
+        public float CO2Max { get; set; }
+        public float O2Max { get; set; }
+        public float NOMax { get; set; }
+        public float OTMax { get; set; }
+        public float RPMMax { get; set; }
+        public float MaxSpeedMax1 { get; set; }
+        public float MaxSpeedMax2 { get; set; }
+        public float MaxSpeedMax3 { get; set; }
+        public float HsuMax1 { get; set; }
+        public float HsuMax2 { get; set; }
+        public float HsuMax3 { get; set; }
+        public float AvgHsuMax { get; set; }
+        public float OilTemperatureMax { get; set; }
+        public float SmokeOpacityMax { get; set; }
+    }
+}

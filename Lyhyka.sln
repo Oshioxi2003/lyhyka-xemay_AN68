@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyhyka", "Lyhyka\Lyhyka.csproj", "{DDA9210A-F8D9-4CDD-BF6B-3D0502685A16}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "LyhykaSetup", "LyhykaSetup\LyhykaSetup.vdproj", "{60BC25CD-044A-4E43-9E60-11AA7DEB54A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LyhykaMultiCabins", "LyhykaMultiCabins\LyhykaMultiCabins.csproj", "{A380A91E-7A5F-4418-8AAF-FAE7187A2110}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "LyhykaMultiCabinsSetup", "LyhykaMultiCabinsSetup\LyhykaMultiCabinsSetup.vdproj", "{6249B6B0-9EEC-BFB6-626B-4B76270C876D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyhyka.DBCore", "Lyhyka.DBCore\Lyhyka.DBCore.csproj", "{828A4277-BEE8-450B-A6F1-8990E9E94C82}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DDA9210A-F8D9-4CDD-BF6B-3D0502685A16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDA9210A-F8D9-4CDD-BF6B-3D0502685A16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDA9210A-F8D9-4CDD-BF6B-3D0502685A16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDA9210A-F8D9-4CDD-BF6B-3D0502685A16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60BC25CD-044A-4E43-9E60-11AA7DEB54A3}.Debug|Any CPU.ActiveCfg = Debug
+		{60BC25CD-044A-4E43-9E60-11AA7DEB54A3}.Release|Any CPU.ActiveCfg = Release
+		{A380A91E-7A5F-4418-8AAF-FAE7187A2110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A380A91E-7A5F-4418-8AAF-FAE7187A2110}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A380A91E-7A5F-4418-8AAF-FAE7187A2110}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A380A91E-7A5F-4418-8AAF-FAE7187A2110}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6249B6B0-9EEC-BFB6-626B-4B76270C876D}.Debug|Any CPU.ActiveCfg = Debug
+		{6249B6B0-9EEC-BFB6-626B-4B76270C876D}.Debug|Any CPU.Build.0 = Debug
+		{6249B6B0-9EEC-BFB6-626B-4B76270C876D}.Release|Any CPU.ActiveCfg = Release
+		{6249B6B0-9EEC-BFB6-626B-4B76270C876D}.Release|Any CPU.Build.0 = Release
+		{828A4277-BEE8-450B-A6F1-8990E9E94C82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{828A4277-BEE8-450B-A6F1-8990E9E94C82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{828A4277-BEE8-450B-A6F1-8990E9E94C82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{828A4277-BEE8-450B-A6F1-8990E9E94C82}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9169CDC3-6387-4091-91F4-BD70D951B67B}
+	EndGlobalSection
+EndGlobal
