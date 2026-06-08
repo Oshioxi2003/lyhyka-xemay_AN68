@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xs:schema id="VehicleDataSet" targetNamespace="http://tempuri.org/VehicleDataSet.xsd" xmlns:mstns="http://tempuri.org/VehicleDataSet.xsd" xmlns="http://tempuri.org/VehicleDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
   <xs:annotation>
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
@@ -137,6 +137,12 @@
               <xs:element name="DiffHoriHBRange" msprop:Generator_ColumnPropNameInRow="DiffHoriHBRange" msprop:Generator_ColumnPropNameInTable="DiffHoriHBRangeColumn" msprop:Generator_ColumnVarNameInTable="columnDiffHoriHBRange" msprop:Generator_UserColumnName="DiffHoriHBRange" type="xs:string" minOccurs="0" />
               <xs:element name="DiffVertiLBRange" msprop:Generator_ColumnPropNameInRow="DiffVertiLBRange" msprop:Generator_ColumnPropNameInTable="DiffVertiLBRangeColumn" msprop:Generator_ColumnVarNameInTable="columnDiffVertiLBRange" msprop:Generator_UserColumnName="DiffVertiLBRange" type="xs:string" minOccurs="0" />
               <xs:element name="DiffHoriLBRange" msprop:Generator_ColumnPropNameInRow="DiffHoriLBRange" msprop:Generator_ColumnPropNameInTable="DiffHoriLBRangeColumn" msprop:Generator_ColumnVarNameInTable="columnDiffHoriLBRange" msprop:Generator_UserColumnName="DiffHoriLBRange" type="xs:string" minOccurs="0" />
+              <xs:element name="HBIntensityResult" type="xs:string" minOccurs="0" />
+              <xs:element name="HBLRResult" type="xs:string" minOccurs="0" />
+              <xs:element name="HBUDResult" type="xs:string" minOccurs="0" />
+              <xs:element name="LBIntensityResult" type="xs:string" minOccurs="0" />
+              <xs:element name="LBLRResult" type="xs:string" minOccurs="0" />
+              <xs:element name="LBUDResult" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

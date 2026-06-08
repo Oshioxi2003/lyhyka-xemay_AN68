@@ -1,4 +1,4 @@
-﻿"DeployProject"
+"DeployProject"
 {
 "VSVersion" = "3:800"
 "ProjectType" = "8:{978C614F-708E-4E1A-B201-565925725DBA}"
@@ -8328,8 +8328,8 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DAE797E90E5241E8B8E66ADCBCB626EB"
             {
-            "SourcePath" = "8:..\\..\\lyhyka.ico"
-            "TargetName" = "8:lyhyka.ico"
+            "SourcePath" = "8:..\\..\\Lyhyka\\AN68.ico"
+            "TargetName" = "8:AN68.ico"
             "Tag" = "8:"
             "Folder" = "8:_3071C7584DDA420785EE6B932D295B42"
             "Condition" = "8:"

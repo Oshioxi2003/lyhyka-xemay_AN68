@@ -210,6 +210,12 @@ namespace Lyhyka.Reports
             reportDataTable.Columns.Add("HLResult", typeof(bool));
             reportDataTable.Columns.Add("HBResult", typeof(bool));
             reportDataTable.Columns.Add("LBResult", typeof(bool));
+            reportDataTable.Columns.Add("HBIntensityResult", typeof(bool));
+            reportDataTable.Columns.Add("HBLRResult", typeof(bool));
+            reportDataTable.Columns.Add("HBUDResult", typeof(bool));
+            reportDataTable.Columns.Add("LBIntensityResult", typeof(bool));
+            reportDataTable.Columns.Add("LBLRResult", typeof(bool));
+            reportDataTable.Columns.Add("LBUDResult", typeof(bool));
             reportDataTable.Columns.Add("NoiseResult", typeof(bool));
             reportDataTable.Columns.Add("WhistleResult", typeof(bool));
 
@@ -338,13 +344,15 @@ namespace Lyhyka.Reports
             bool noiseResult = GlobalFunctions.CheckStandard(testData.Noise, brand.NoiseMin, brand.NoiseMax);
 
 
-            bool headLightResult = testData.LongRangeLightIntensity >= brand.LongRangeLightIntensityMax
-                && GlobalFunctions.CheckStandard(testData.LightDeviationLR, brand.LightDeviationLRMin, brand.LightDeviationLRMax)
-                && GlobalFunctions.CheckStandard(testData.LightDeviationUD, brand.LightDeviationUDMin, brand.LightDeviationUDMax);
+            bool hbIntensityResult = testData.LongRangeLightIntensity >= brand.LongRangeLightIntensityMax;
+            bool hbLRResult = CheckLightDeviation(testData.LightDeviationLR, brand.LightDeviationLeftMin, brand.LightDeviationLeftMax, brand.LightDeviationRightMin, brand.LightDeviationRightMax, brand.LightDeviationLRMin, brand.LightDeviationLRMax);
+            bool hbUDResult = CheckLightDeviation(testData.LightDeviationUD, brand.LightDeviationUpMin, brand.LightDeviationUpMax, brand.LightDeviationDownMin, brand.LightDeviationDownMax, brand.LightDeviationUDMin, brand.LightDeviationUDMax);
+            bool headLightResult = hbIntensityResult && hbLRResult && hbUDResult;
 
-            bool nearLighResult = testData.LongRangeNearLightIntensity >= brand.LongRangeNearLightIntensityMax
-                && GlobalFunctions.CheckStandard(testData.NearLightDeviationLR, brand.NearLightDeviationLRMin, brand.NearLightDeviationLRMax)
-                && GlobalFunctions.CheckStandard(testData.NearLightDeviationUD, brand.NearLightDeviationUDMin, brand.NearLightDeviationUDMax);
+            bool lbIntensityResult = testData.LongRangeNearLightIntensity >= brand.LongRangeNearLightIntensityMax;
+            bool lbLRResult = CheckLightDeviation(testData.NearLightDeviationLR, brand.NearLightDeviationLeftMin, brand.NearLightDeviationLeftMax, brand.NearLightDeviationRightMin, brand.NearLightDeviationRightMax, brand.NearLightDeviationLRMin, brand.NearLightDeviationLRMax);
+            bool lbUDResult = CheckLightDeviation(testData.NearLightDeviationUD, brand.NearLightDeviationUpMin, brand.NearLightDeviationUpMax, brand.NearLightDeviationDownMin, brand.NearLightDeviationDownMax, brand.NearLightDeviationUDMin, brand.NearLightDeviationUDMax);
+            bool nearLighResult = lbIntensityResult && lbLRResult && lbUDResult;
             bool hcResult = GlobalVariables.IsElectricMotorbike ? true : GlobalFunctions.CheckStandard(testData.HC, brand.HCMin, brand.HCMax);
             bool coResult = GlobalVariables.IsElectricMotorbike ? true : GlobalFunctions.CheckStandard(testData.CO, brand.COMin, brand.COMax);
 
@@ -365,6 +373,12 @@ namespace Lyhyka.Reports
             reportRow["WhistleResult"] = whistleResult;
             reportRow["HBResult"] = headLightResult;
             reportRow["LBResult"] = nearLighResult;
+            reportRow["HBIntensityResult"] = hbIntensityResult;
+            reportRow["HBLRResult"] = hbLRResult;
+            reportRow["HBUDResult"] = hbUDResult;
+            reportRow["LBIntensityResult"] = lbIntensityResult;
+            reportRow["LBLRResult"] = lbLRResult;
+            reportRow["LBUDResult"] = lbUDResult;
 
             reportRow["VoltageDropResult"] = voltageDropResult;
             reportRow["OverCurrentResult"] = overCurrentResult;
@@ -380,10 +394,41 @@ namespace Lyhyka.Reports
 
             if (GlobalVariables.HeadLightUnitIsPercentage)
             {
-                reportRow["LightDeviationUDMinMax"] = $"U{GlobalFunctions.FormatRange(brand.LightDeviationUpMin, brand.LightDeviationUpMax, "F0")} D{GlobalFunctions.FormatRange(brand.LightDeviationDownMin, brand.LightDeviationDownMax, "F0")}";
-                reportRow["LightDeviationLRMinMax"] = $"L{GlobalFunctions.FormatRange(brand.LightDeviationLeftMin / 100, brand.LightDeviationLeftMax / 100, "F0")} R{GlobalFunctions.FormatRange(brand.LightDeviationRightMin / 100, brand.LightDeviationRightMax / 100, "F0")}";
-                reportRow["NearLightDeviationUDMinMax"] = $"U{GlobalFunctions.FormatRange(brand.NearLightDeviationUpMin, brand.NearLightDeviationUpMax, "F0")} D{GlobalFunctions.FormatRange(brand.NearLightDeviationDownMin, brand.NearLightDeviationDownMax, "F0")}";
-                reportRow["NearLightDeviationLRMinMax"] = $"L{GlobalFunctions.FormatRange(brand.NearLightDeviationLeftMin / 100, brand.NearLightDeviationLeftMax / 100, "F0")} R{GlobalFunctions.FormatRange(brand.NearLightDeviationRightMin / 100, brand.NearLightDeviationRightMax / 100, "F0")}";
+                if (brand.LightDeviationUpMin == 0 && brand.LightDeviationUpMax == 0 && brand.LightDeviationDownMin == 0 && brand.LightDeviationDownMax == 0)
+                {
+                    reportRow["LightDeviationUDMinMax"] = GlobalFunctions.FormatRange(brand.LightDeviationUDMin, brand.LightDeviationUDMax, "F0");
+                }
+                else
+                {
+                    reportRow["LightDeviationUDMinMax"] = $"U{GlobalFunctions.FormatRange(brand.LightDeviationUpMin, brand.LightDeviationUpMax, "F0")} D{GlobalFunctions.FormatRange(brand.LightDeviationDownMin, brand.LightDeviationDownMax, "F0")}";
+                }
+
+                if (brand.LightDeviationLeftMin == 0 && brand.LightDeviationLeftMax == 0 && brand.LightDeviationRightMin == 0 && brand.LightDeviationRightMax == 0)
+                {
+                    reportRow["LightDeviationLRMinMax"] = GlobalFunctions.FormatRange(brand.LightDeviationLRMin / 100, brand.LightDeviationLRMax / 100, "F0");
+                }
+                else
+                {
+                    reportRow["LightDeviationLRMinMax"] = $"L{GlobalFunctions.FormatRange(brand.LightDeviationLeftMin / 100, brand.LightDeviationLeftMax / 100, "F0")} R{GlobalFunctions.FormatRange(brand.LightDeviationRightMin / 100, brand.LightDeviationRightMax / 100, "F0")}";
+                }
+
+                if (brand.NearLightDeviationUpMin == 0 && brand.NearLightDeviationUpMax == 0 && brand.NearLightDeviationDownMin == 0 && brand.NearLightDeviationDownMax == 0)
+                {
+                    reportRow["NearLightDeviationUDMinMax"] = GlobalFunctions.FormatRange(brand.NearLightDeviationUDMin, brand.NearLightDeviationUDMax, "F0");
+                }
+                else
+                {
+                    reportRow["NearLightDeviationUDMinMax"] = $"U{GlobalFunctions.FormatRange(brand.NearLightDeviationUpMin, brand.NearLightDeviationUpMax, "F0")} D{GlobalFunctions.FormatRange(brand.NearLightDeviationDownMin, brand.NearLightDeviationDownMax, "F0")}";
+                }
+
+                if (brand.NearLightDeviationLeftMin == 0 && brand.NearLightDeviationLeftMax == 0 && brand.NearLightDeviationRightMin == 0 && brand.NearLightDeviationRightMax == 0)
+                {
+                    reportRow["NearLightDeviationLRMinMax"] = GlobalFunctions.FormatRange(brand.NearLightDeviationLRMin / 100, brand.NearLightDeviationLRMax / 100, "F0");
+                }
+                else
+                {
+                    reportRow["NearLightDeviationLRMinMax"] = $"L{GlobalFunctions.FormatRange(brand.NearLightDeviationLeftMin / 100, brand.NearLightDeviationLeftMax / 100, "F0")} R{GlobalFunctions.FormatRange(brand.NearLightDeviationRightMin / 100, brand.NearLightDeviationRightMax / 100, "F0")}";
+                }
 
                 // Split deviations - HB
                 reportRow["HBDeviationLRLeft"] = FormatSplitRange(brand.LightDeviationLeftMin, brand.LightDeviationLeftMax, "trái");
@@ -398,10 +443,41 @@ namespace Lyhyka.Reports
             }
             else
             {
-                reportRow["LightDeviationUDMinMax"] = $"U{GlobalFunctions.FormatRange(brand.LightDeviationUpMin, brand.LightDeviationUpMax, "F0")} D{GlobalFunctions.FormatRange(brand.LightDeviationDownMin, brand.LightDeviationDownMax, "F0")}";
-                reportRow["LightDeviationLRMinMax"] = $"L{GlobalFunctions.FormatRange(brand.LightDeviationLeftMin, brand.LightDeviationLeftMax, "F0")} R{GlobalFunctions.FormatRange(brand.LightDeviationRightMin, brand.LightDeviationRightMax, "F0")}";
-                reportRow["NearLightDeviationUDMinMax"] = $"U{GlobalFunctions.FormatRange(brand.NearLightDeviationUpMin, brand.NearLightDeviationUpMax, "F0")} D{GlobalFunctions.FormatRange(brand.NearLightDeviationDownMin, brand.NearLightDeviationDownMax, "F0")}";
-                reportRow["NearLightDeviationLRMinMax"] = $"L{GlobalFunctions.FormatRange(brand.NearLightDeviationLeftMin, brand.NearLightDeviationLeftMax, "F0")} R{GlobalFunctions.FormatRange(brand.NearLightDeviationRightMin, brand.NearLightDeviationRightMax, "F0")}";
+                if (brand.LightDeviationUpMin == 0 && brand.LightDeviationUpMax == 0 && brand.LightDeviationDownMin == 0 && brand.LightDeviationDownMax == 0)
+                {
+                    reportRow["LightDeviationUDMinMax"] = GlobalFunctions.FormatRange(brand.LightDeviationUDMin, brand.LightDeviationUDMax, "F0");
+                }
+                else
+                {
+                    reportRow["LightDeviationUDMinMax"] = $"U{GlobalFunctions.FormatRange(brand.LightDeviationUpMin, brand.LightDeviationUpMax, "F0")} D{GlobalFunctions.FormatRange(brand.LightDeviationDownMin, brand.LightDeviationDownMax, "F0")}";
+                }
+
+                if (brand.LightDeviationLeftMin == 0 && brand.LightDeviationLeftMax == 0 && brand.LightDeviationRightMin == 0 && brand.LightDeviationRightMax == 0)
+                {
+                    reportRow["LightDeviationLRMinMax"] = GlobalFunctions.FormatRange(brand.LightDeviationLRMin, brand.LightDeviationLRMax, "F0");
+                }
+                else
+                {
+                    reportRow["LightDeviationLRMinMax"] = $"L{GlobalFunctions.FormatRange(brand.LightDeviationLeftMin, brand.LightDeviationLeftMax, "F0")} R{GlobalFunctions.FormatRange(brand.LightDeviationRightMin, brand.LightDeviationRightMax, "F0")}";
+                }
+
+                if (brand.NearLightDeviationUpMin == 0 && brand.NearLightDeviationUpMax == 0 && brand.NearLightDeviationDownMin == 0 && brand.NearLightDeviationDownMax == 0)
+                {
+                    reportRow["NearLightDeviationUDMinMax"] = GlobalFunctions.FormatRange(brand.NearLightDeviationUDMin, brand.NearLightDeviationUDMax, "F0");
+                }
+                else
+                {
+                    reportRow["NearLightDeviationUDMinMax"] = $"U{GlobalFunctions.FormatRange(brand.NearLightDeviationUpMin, brand.NearLightDeviationUpMax, "F0")} D{GlobalFunctions.FormatRange(brand.NearLightDeviationDownMin, brand.NearLightDeviationDownMax, "F0")}";
+                }
+
+                if (brand.NearLightDeviationLeftMin == 0 && brand.NearLightDeviationLeftMax == 0 && brand.NearLightDeviationRightMin == 0 && brand.NearLightDeviationRightMax == 0)
+                {
+                    reportRow["NearLightDeviationLRMinMax"] = GlobalFunctions.FormatRange(brand.NearLightDeviationLRMin, brand.NearLightDeviationLRMax, "F0");
+                }
+                else
+                {
+                    reportRow["NearLightDeviationLRMinMax"] = $"L{GlobalFunctions.FormatRange(brand.NearLightDeviationLeftMin, brand.NearLightDeviationLeftMax, "F0")} R{GlobalFunctions.FormatRange(brand.NearLightDeviationRightMin, brand.NearLightDeviationRightMax, "F0")}";
+                }
 
                 // Split deviations - HB
                 reportRow["HBDeviationLRLeft"] = FormatSplitRange(brand.LightDeviationLeftMin, brand.LightDeviationLeftMax, "trái");
@@ -414,7 +490,14 @@ namespace Lyhyka.Reports
                 reportRow["LBDeviationUDUp"] = FormatSplitRange(brand.NearLightDeviationUpMin, brand.NearLightDeviationUpMax, "trên");
                 reportRow["LBDeviationUDDown"] = FormatSplitRange(brand.NearLightDeviationDownMin, brand.NearLightDeviationDownMax, "dưới");
             }
-            reportRow["FinalResult"] = sideSlipResult && brakeResult && speedResult && whistleResult && noiseResult && headLightResult && nearLighResult && coResult && hcResult;
+            if (GlobalVariables.IsElectricMotorbike)
+            {
+                reportRow["FinalResult"] = sideSlipResult && brakeResult && speedResult && whistleResult && noiseResult && headLightResult && nearLighResult && voltageDropResult && overCurrentResult && axleTorqueFrontResult && axleTorqueRearResult && axleTorqueForkResult;
+            }
+            else
+            {
+                reportRow["FinalResult"] = sideSlipResult && brakeResult && speedResult && whistleResult && noiseResult && headLightResult && nearLighResult && coResult && hcResult;
+            }
             reportDataTable.Rows.Add(reportRow);
 
 
@@ -464,6 +547,23 @@ namespace Lyhyka.Reports
             if ((!min.HasValue || min.Value == 0) && (!max.HasValue || max.Value == 0))
                 return "";
             return $"{label} {GlobalFunctions.FormatRange(min, max, "F0")}";
+        }
+
+        public static bool CheckLightDeviation(float value, float leftOrUpMin, float leftOrUpMax, float rightOrDownMin, float rightOrDownMax, float fallbackMin, float fallbackMax)
+        {
+            if (leftOrUpMin == 0 && leftOrUpMax == 0 && rightOrDownMin == 0 && rightOrDownMax == 0)
+            {
+                return GlobalFunctions.CheckStandard(value, fallbackMin, fallbackMax);
+            }
+
+            if (value >= 0)
+            {
+                return value >= leftOrUpMin && value <= leftOrUpMax;
+            }
+            else
+            {
+                return Math.Abs(value) >= rightOrDownMin && Math.Abs(value) <= rightOrDownMax;
+            }
         }
 
         static decimal ConvertToDecimal(object value, decimal defaultValue = 0)

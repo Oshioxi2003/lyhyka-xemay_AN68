@@ -220,7 +220,7 @@ namespace Lyhyka.UCT
         }
         private void txtCO_TextChanged(object sender, EventArgs e)
         {
-            GlobalVariables.TestVehicle.HC = string.IsNullOrEmpty(txtCO.Text) ? 0 : float.Parse(txtCO.Text);
+            GlobalVariables.TestVehicle.CO = string.IsNullOrEmpty(txtCO.Text) ? 0 : float.Parse(txtCO.Text);
             txtCO.BackColor = CheckColor(GlobalVariables.TestVehicle.CO, GlobalVariables.SelectedBrand.COMin, GlobalVariables.SelectedBrand.COMax);
 
         }

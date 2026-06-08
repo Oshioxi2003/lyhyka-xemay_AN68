@@ -1021,7 +1021,7 @@
     <Content Include="Image\QR_Sentek.png" />
     <Content Include="Logo_sentek.ico" />
     <None Include="Resources\z6809962917592_c332b33ffb1a03f593c234cbb87b327e.jpg" />
-    <Content Include="lyhyka.ico" />
+
     <None Include="Resources\logo.png" />
     <None Include="Resources\edit-button1.png" />
     <None Include="Resources\printing.png" />

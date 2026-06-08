@@ -6,14 +6,14 @@ Unicode True
 
 ; ---------- Thong tin chung ----------
 !define APP_NAME        "Lyhyka Motorbike AN68"
-!define APP_VERSION     "05.26.26.01"
+!define APP_VERSION     "06.08.26.01"
 !define APP_PUBLISHER   "Lyhyka"
 !define APP_EXE         "AN68.exe"
 !define INSTALL_DIR     "$LOCALAPPDATA\Lyhyka\Motorbike_AN68"
 !define REG_KEY         "Software\Microsoft\Windows\CurrentVersion\Uninstall\LyhykaMotorbikeAN68"
-!define OUTPUT_FILE     "..\LyhykaMotorbike_AN68_Setup_v05.26.26.01.exe"
+!define OUTPUT_FILE     "..\LyhykaMotorbike_AN68_Setup_v06.08.26.01.exe"
 !define SOURCE_DIR      "..\Lyhyka\bin\Release"
-!define APP_ICON        "..\Lyhyka\lyhyka.ico"
+!define APP_ICON        "..\Lyhyka\AN68.ico"
 
 ; ---------- Cau hinh installer ----------
 Name "${APP_NAME} ${APP_VERSION}"
