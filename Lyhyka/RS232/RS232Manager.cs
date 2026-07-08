@@ -1,4 +1,4 @@
-﻿using Lyhyka;
+using Lyhyka;
 using OPCAutomation;
 using System;
 using System.Collections.Generic;
@@ -22,6 +22,7 @@ namespace Lyhyka.RS232
         public static bool UsingMQD6A = bool.Parse(ConfigurationManager.AppSettings["UsingMQD6A"]);
         public static bool ShowLowBeamLightIntensity = bool.Parse(ConfigurationManager.AppSettings["ShowLowBeamLightIntensity"]);
         public static bool ShowLowBeamLightDeviationLR = bool.Parse(ConfigurationManager.AppSettings["ShowLowBeamLightDeviationLR"]);
+        public static bool ShowTorqueCheck = bool.Parse(ConfigurationManager.AppSettings["ShowTorqueCheck"] ?? "true");
         public static void InitializeCOMConnections()
         {
             try

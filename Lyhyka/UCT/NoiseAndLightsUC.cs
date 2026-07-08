@@ -60,6 +60,7 @@ namespace Lyhyka.UCT
             txtAxleTorqueFront2.Text = GlobalVariables.TestVehicle.AxleTorqueFront.ToString();
             txtAxleTorqueRear2.Text = GlobalVariables.TestVehicle.AxleTorqueRear.ToString();
             txtWhistle.Text = GlobalVariables.TestVehicle.Whistle.ToString();
+            txtNoise.Text = GlobalVariables.TestVehicle.Noise.ToString();
             txtRealSpeed2.Text = txtRealSpeed.Text = GlobalVariables.TestVehicle.RealSpeed.ToString();
 
         }
@@ -102,6 +103,7 @@ namespace Lyhyka.UCT
         public void UpdateRange()
         {
             txtWhistle.BackColor = CheckColor(GlobalVariables.TestVehicle.Whistle, GlobalVariables.SelectedBrand.WhistleMin, GlobalVariables.SelectedBrand.WhistleMax);
+            txtNoise.BackColor = CheckColor(GlobalVariables.TestVehicle.Noise, GlobalVariables.SelectedBrand.NoiseMin, GlobalVariables.SelectedBrand.NoiseMax);
 
             txtLongRangeHeadLightIntensity.BackColor = CheckColor(GlobalVariables.TestVehicle.LongRangeLightIntensity, GlobalVariables.SelectedBrand.LongRangeLightIntensityMin, GlobalVariables.SelectedBrand.LongRangeLightIntensityMax);
             txtHeadLightDeviationUD.BackColor = CheckColor(GlobalVariables.TestVehicle.LightDeviationUD, GlobalVariables.SelectedBrand.LightDeviationUDMin, GlobalVariables.SelectedBrand.LightDeviationUDMax);
@@ -129,10 +131,30 @@ namespace Lyhyka.UCT
         }
         private void txtWhistle_TextChanged(object sender, EventArgs e)
         {
-          
-            GlobalVariables.TestVehicle.Whistle = string.IsNullOrEmpty(txtWhistle.Text) ? 0 : float.Parse(txtWhistle.Text);
-           
+            float val;
+            if (float.TryParse(txtWhistle.Text, out val))
+            {
+                GlobalVariables.TestVehicle.Whistle = val;
+            }
+            else
+            {
+                GlobalVariables.TestVehicle.Whistle = 0;
+            }
             txtWhistle.BackColor = CheckColor(GlobalVariables.TestVehicle.Whistle, GlobalVariables.SelectedBrand.WhistleMin, GlobalVariables.SelectedBrand.WhistleMax);
+        }
+
+        private void txtNoise_TextChanged(object sender, EventArgs e)
+        {
+            float val;
+            if (float.TryParse(txtNoise.Text, out val))
+            {
+                GlobalVariables.TestVehicle.Noise = val;
+            }
+            else
+            {
+                GlobalVariables.TestVehicle.Noise = 0;
+            }
+            txtNoise.BackColor = CheckColor(GlobalVariables.TestVehicle.Noise, GlobalVariables.SelectedBrand.NoiseMin, GlobalVariables.SelectedBrand.NoiseMax);
         }
 
 
@@ -246,18 +268,41 @@ namespace Lyhyka.UCT
         }
         private void NoiseAndLightsUC_Load(object sender, EventArgs e)
         {
-            foreach (Control ctrl in this.Controls)
+            RegisterTextBoxEvents(this);
+            btnStartHigh.Visible = btnStopHigh.Visible = btnStartLow.Visible = btnStopLow.Visible = RS232Manager.UsingMQD6A;
+            SetVisibleAccordingToVehicleType();
+            lblLongRangeNearLightIntensity.Visible = txtLongRangeNearLightIntensity.Visible = RS232Manager.ShowLowBeamLightIntensity;
+            lblNearLR.Visible = txtNearLightDeviationLR.Visible = RS232Manager.ShowLowBeamLightDeviationLR;
+
+            if (!RS232Manager.ShowTorqueCheck)
+            {
+                label12.Visible = txtAxleTorqueFront.Visible = false;
+                label5.Visible = txtAxleTorqueRear.Visible = false;
+                label17.Visible = txtAxleTorqueFront2.Visible = false;
+                label18.Visible = txtAxleTorqueRear2.Visible = false;
+
+                tableLayoutPanel1.RowStyles[2] = new RowStyle(SizeType.Absolute, 0F);
+                tableLayoutPanel1.RowStyles[3] = new RowStyle(SizeType.Absolute, 0F);
+                tableLayoutPanel2.RowStyles[7] = new RowStyle(SizeType.Absolute, 0F);
+                tableLayoutPanel2.RowStyles[8] = new RowStyle(SizeType.Absolute, 0F);
+            }
+        }
+
+        private void RegisterTextBoxEvents(Control parent)
+        {
+            foreach (Control ctrl in parent.Controls)
             {
                 if (ctrl is TextBox)
                 {
                     ctrl.Enter += textBox_Enter;
                     ctrl.MouseUp += textBox_MouseUp;
+                    ctrl.KeyPress += textBox_KeyPress;
+                }
+                else if (ctrl.HasChildren)
+                {
+                    RegisterTextBoxEvents(ctrl);
                 }
             }
-            btnStartHigh.Visible = btnStopHigh.Visible = btnStartLow.Visible = btnStopLow.Visible = RS232Manager.UsingMQD6A;
-            SetVisibleAccordingToVehicleType();
-            lblLongRangeNearLightIntensity.Visible = txtLongRangeNearLightIntensity.Visible = RS232Manager.ShowLowBeamLightIntensity;
-            lblNearLR.Visible = txtNearLightDeviationLR.Visible = RS232Manager.ShowLowBeamLightDeviationLR;
         }
         private void textBox_Enter(object sender, EventArgs e)
         {

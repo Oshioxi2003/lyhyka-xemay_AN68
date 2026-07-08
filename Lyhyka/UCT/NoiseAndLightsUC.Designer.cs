@@ -1,4 +1,4 @@
-﻿namespace Lyhyka.UCT
+namespace Lyhyka.UCT
 {
     partial class NoiseAndLightsUC
     {
@@ -289,6 +289,7 @@
             this.txtNoise.Size = new System.Drawing.Size(271, 36);
             this.txtNoise.TabIndex = 40;
             this.txtNoise.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtNoise.TextChanged += new System.EventHandler(this.txtNoise_TextChanged);
             // 
             // label7
             // 
@@ -498,6 +499,7 @@
             this.txtWhistle.Size = new System.Drawing.Size(271, 36);
             this.txtWhistle.TabIndex = 30;
             this.txtWhistle.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtWhistle.TextChanged += new System.EventHandler(this.txtWhistle_TextChanged);
             // 
             // panel3
             // 

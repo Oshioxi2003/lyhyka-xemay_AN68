@@ -226,6 +226,7 @@ namespace Lyhyka.Reports
             reportDataTable.Columns.Add("ShowLowBeamLightDeviationLR", typeof(int));
             reportDataTable.Columns.Add("ShowRealSpeed", typeof(int));
             reportDataTable.Columns.Add("HideInspectionSection", typeof(int));
+            reportDataTable.Columns.Add("ShowTorqueCheck", typeof(int));
 
             // Gọi hàm GetVehicleStandardsByTypeCar để lấy tiêu chuẩn theo loại xe
             string vehicleType = brand.Name;
@@ -332,6 +333,7 @@ namespace Lyhyka.Reports
             reportRow["ShowLowBeamLightDeviationLR"] = RS232Manager.ShowLowBeamLightDeviationLR ? 0 : 1;
             reportRow["ShowRealSpeed"] = brand.IsShowRealSpeed ? 0 : 1;
             reportRow["HideInspectionSection"] = brand.IsHideInspectionSection ? 1 : 0;
+            reportRow["ShowTorqueCheck"] = RS232Manager.ShowTorqueCheck ? 0 : 1;
 
             // Tính toán kết quả cho các phần
             bool sideSlipResult = GlobalFunctions.CheckStandard(testData.SlideSlip, brand.SlideSlipMin, brand.SlideSlipMax);
