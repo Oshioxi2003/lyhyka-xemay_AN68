@@ -324,14 +324,14 @@ namespace Lyhyka.UCT
         private void btnNoise_Click(object sender, EventArgs e)
         {
             GlobalVariables.TestVehicle.Noise = OPCManager.MaxNoise;
-            OPCManager.MaxNoise = float.MinValue;
+            OPCManager.ResetMaxNoise();
             txtNoise.Text = GlobalVariables.TestVehicle.Noise.ToString("F1");
         }
 
         private void btnWhistle_Click(object sender, EventArgs e)
         {
             GlobalVariables.TestVehicle.Whistle = OPCManager.MaxNoise;
-            OPCManager.MaxNoise = float.MinValue;
+            OPCManager.ResetMaxNoise();
             txtWhistle.Text = GlobalVariables.TestVehicle.Whistle.ToString("F1");
         }
 

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using static DevExpress.Utils.Diagnostics.GUIResources;
 
@@ -29,6 +30,37 @@ namespace Lyhyka
         private static OPCGroup _noiseGroup;
 
         public static float MaxNoise { set; get; } = float.MinValue;
+
+        // doon_reset trên KEPServer là kiểu Short (D0009), không phải Boolean -> ghi số, không ghi bool.
+        // Tag này giữ mức (level-hold), không tự pulse: phải ghi 1 rồi ghi lại 0
+        // để PLC nhả chốt còi, nếu không PLC sẽ tiếp tục trả về giá trị đỉnh cũ.
+        public static void ResetMaxNoise()
+        {
+            NoiseGroupInfo.Tags[TagConstants.doon_reset].WriteValue(1f);
+            Thread.Sleep(300); // > chu kỳ quét PLC
+            NoiseGroupInfo.Tags[TagConstants.doon_reset].WriteValue(0f);
+            MaxNoise = float.MinValue;
+        }
+
+        private static readonly object _logLock = new object();
+
+        private static void LogToFile(string fileName, string message)
+        {
+            try
+            {
+                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+                lock (_logLock)
+                {
+                    File.AppendAllText(path, $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}] {message}{Environment.NewLine}");
+                }
+            }
+            catch
+            {
+                // Không để lỗi ghi log làm crash luồng OPC
+            }
+        }
+        private static void LogTagError(string message) => LogToFile("opc_tag_errors.log", message);
+
         private static bool opcErrorShown = false;
         public static bool isConnected = false;
         public bool IsConnected => isConnected;
@@ -298,7 +330,9 @@ namespace Lyhyka
             {
             { TagConstants.doon_doon , new OPCTag(TagConstants.noiseDevice, "doon")},
                { TagConstants.doon_doon_batdau , new OPCTag(TagConstants.noiseDevice, "doon_batdau",true)},
-                  { TagConstants.doon_doon_ketthuc , new OPCTag(TagConstants.noiseDevice, "doon_ketthuc",true)}
+                  { TagConstants.doon_doon_ketthuc , new OPCTag(TagConstants.noiseDevice, "doon_ketthuc",true)},
+                  { TagConstants.doon_reset , new OPCTag(TagConstants.noiseDevice, "doon_reset")},
+                  { TagConstants.doon_max , new OPCTag(TagConstants.noiseDevice, "doon_max")}
             }
         };
         public void ConnectOPCServer()
@@ -355,7 +389,7 @@ namespace Lyhyka
                 }
                 catch (Exception ex)
                 {
-                    //MessageBox.Show($"Lỗi khi thêm tag {tag.Value.Tag}, {tag.Key}: {ex.Message}");
+                    LogTagError($"AddItem lỗi cho tag '{tag.Value.Tag}' (nhóm={opcGroupInfo.Name}, handle={tag.Key}): {ex.Message}");
                 }
             }
         }
@@ -675,14 +709,17 @@ namespace Lyhyka
                             break;
                         case TagConstants.doon_doon:
                             var whistle = GlobalFunctions.ConvertIntToFloat(value);
-                            if (whistle <= 0)
-                                break;
-                            if (whistle > MaxNoise)
-                                MaxNoise = whistle;
+                            NoiseGroupInfo.Tags[TagConstants.doon_doon].Value = whistle;
                             //var averageWhistle = whistle;
                             //NoiseGroupInfo.Tags[TagConstants.doon_doon].Value = averageWhistle;
-                            //GlobalVariables.TestVehicle.Whistle = averageWhistle; 
+                            //GlobalVariables.TestVehicle.Whistle = averageWhistle;
                             //OnDataReceived?.Invoke(MenuConstants.Noise);
+                            break;
+                        case TagConstants.doon_max:
+                            // PLC tự giữ đỉnh còi, đọc trực tiếp thay vì client tự dò max
+                            var maxNoise = GlobalFunctions.ConvertIntToFloat(value);
+                            NoiseGroupInfo.Tags[TagConstants.doon_max].Value = maxNoise;
+                            MaxNoise = maxNoise;
                             break;
                         default:
                             break;

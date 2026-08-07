@@ -171,7 +171,7 @@ namespace Lyhyka.UCT
             this.lblNote.Padding = new System.Windows.Forms.Padding(22, 12, 22, 12);
             this.lblNote.Size = new System.Drawing.Size(1478, 160);
             this.lblNote.TabIndex = 45;
-            this.lblNote.Text = "Chú ý: Lệch trái là +, lệch phải là - | Lệch trên là +, lệch dưới là -";
+            this.lblNote.Text = "Chú ý: Lệch trái là -, lệch phải là + | Lệch trên là +, lệch dưới là -";
             this.lblNote.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtNearLightDeviationLR

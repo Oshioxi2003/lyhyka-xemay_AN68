@@ -71,9 +71,11 @@ namespace Lyhyka.Core
         public const int trungvet_max_batdau = 6;
         public const int trungvet_max_ketthuc = 7;
 
-        public const int doon_doon = 1; 
-        public const int doon_doon_batdau = 2; 
+        public const int doon_doon = 1;
+        public const int doon_doon_batdau = 2;
         public const int doon_doon_ketthuc = 3;
+        public const int doon_reset = 4;
+        public const int doon_max = 5;
     }
 
     public class ColorConstants
