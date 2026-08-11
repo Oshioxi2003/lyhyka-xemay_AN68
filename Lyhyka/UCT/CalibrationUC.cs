@@ -12,8 +12,10 @@ namespace Lyhyka.UCT
         string _menu = "";
         bool isSlideSlip = false;
         string DeviceValueTag, CabiTag, ATag, BTag;
+        string ATagTrai, BTagTrai, ATagPhai, BTagPhai;
         float x1 = 0;
-        float x2 = 0;
+        float x2 = 0; // Điểm đo 2 - nhánh trái khi là trùng vết, điểm đo 2 chung khi là tốc độ/lực phanh
+        float x2Phai = 0; // Điểm đo 2 - nhánh phải, chỉ dùng cho trùng vết
         float zeroDelta = 0;
         float originalValue = 0;
         public CalibrationUC()
@@ -62,7 +64,22 @@ namespace Lyhyka.UCT
                 CabiTag = $"{TagConstants.chanel}.{deviceTag}.calib";
                 ATag = $"{TagConstants.chanel}.{deviceTag}.calib_a";
                 BTag = $"{TagConstants.chanel}.{deviceTag}.calib_b";
+                ATagTrai = $"{TagConstants.chanel}.{deviceTag}.calib_a_trai";
+                BTagTrai = $"{TagConstants.chanel}.{deviceTag}.calib_b_trai";
+                ATagPhai = $"{TagConstants.chanel}.{deviceTag}.calib_a_phai";
+                BTagPhai = $"{TagConstants.chanel}.{deviceTag}.calib_b_phai";
             }
+
+            // Trùng vết có 2 nhánh (trái/phải) hiệu chuẩn riêng, các thông số khác chỉ có 1 điểm đo 2
+            label5.Text = isSlideSlip ? "Điểm đo chuẩn 2 - Trái" : "Điểm đo chuẩn 2";
+            label6.Text = isSlideSlip ? "Giá trị điểm đo từ thiết bị 2 - Trái" : "Giá trị điểm đo từ thiết bị 2";
+            btnAcpCalibrate2.Text = isSlideSlip ? "CHỐT GIÁ TRỊ ĐO 2 (TRÁI)" : "CHỐT GIÁ TRỊ ĐO 2";
+            label7.Visible = isSlideSlip;
+            label8.Visible = isSlideSlip;
+            txtCalibrateInput2Phai.Visible = isSlideSlip;
+            lbCalibrateIput2Phai.Visible = isSlideSlip;
+            txt2Phai.Visible = isSlideSlip;
+            btnAcpCalibrate2Phai.Visible = isSlideSlip;
         }
       
         public void UpdateCurrentValue(float currentValue)
@@ -116,15 +133,34 @@ namespace Lyhyka.UCT
         private void btnSavePara_Click_1(object sender, EventArgs e)
         {
             var y1 = float.Parse(txtCalibrateInput1.Text);
-            var y2 = float.Parse(txtCalibrateInput2.Text);
-            // Tính a
-            float a = (y2 - y1) / (x2 - x1);
-            // Tính b
-            float b = y1 - a * x1;
-            // Lưu vào OPC  
-            OPCManager.SetOPCValue(ATag, a); 
-            OPCManager.SetOPCValue(BTag, b); 
-            OPCManager.SetOPCValue(CabiTag, 1);
+
+            if (isSlideSlip)
+            {
+                // Nhánh trái: đường thẳng qua (x1,y1) và (x2,y2Trai)
+                var y2Trai = float.Parse(txtCalibrateInput2.Text);
+                float aTrai = (y2Trai - y1) / (x2 - x1);
+                float bTrai = y1 - aTrai * x1;
+
+                // Nhánh phải: đường thẳng qua (x1,y1) và (x2Phai,y2Phai)
+                var y2Phai = float.Parse(txtCalibrateInput2Phai.Text);
+                float aPhai = (y2Phai - y1) / (x2Phai - x1);
+                float bPhai = y1 - aPhai * x1;
+
+                OPCManager.SetOPCValue(ATagTrai, aTrai);
+                OPCManager.SetOPCValue(BTagTrai, bTrai);
+                OPCManager.SetOPCValue(ATagPhai, aPhai);
+                OPCManager.SetOPCValue(BTagPhai, bPhai);
+                OPCManager.SetOPCValue(CabiTag, 1);
+            }
+            else
+            {
+                var y2 = float.Parse(txtCalibrateInput2.Text);
+                float a = (y2 - y1) / (x2 - x1);
+                float b = y1 - a * x1;
+                OPCManager.SetOPCValue(ATag, a);
+                OPCManager.SetOPCValue(BTag, b);
+                OPCManager.SetOPCValue(CabiTag, 1);
+            }
             MessageBox.Show("Hiểu chỉnh thành công!");
         }
 
@@ -165,7 +201,14 @@ namespace Lyhyka.UCT
         {
             lbCalibrateIput2.Text = txtCurrentValue.Text;
             x2 = OPCManager.GetOPCValueAsFloat(DeviceValueTag);
-            txt2.Text = x2.ToString("F2"); // Hiển thị giá trị x1
-        } 
+            txt2.Text = x2.ToString("F2"); // Hiển thị giá trị x2 (nhánh trái khi là trùng vết)
+        }
+
+        private void btnAcpCalibrate2Phai_Click(object sender, EventArgs e)
+        {
+            lbCalibrateIput2Phai.Text = txtCurrentValue.Text;
+            x2Phai = OPCManager.GetOPCValueAsFloat(DeviceValueTag);
+            txt2Phai.Text = x2Phai.ToString("F2"); // Hiển thị giá trị x2 nhánh phải
+        }
     }
 }

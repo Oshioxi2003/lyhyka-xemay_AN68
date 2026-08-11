@@ -48,6 +48,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnSavePara = new System.Windows.Forms.Button();
             this.btnZeroValue = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtCalibrateInput2Phai = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lbCalibrateIput2Phai = new System.Windows.Forms.Label();
+            this.txt2Phai = new System.Windows.Forms.Label();
+            this.btnAcpCalibrate2Phai = new System.Windows.Forms.Button();
             this.CalibrationPanel.SuspendLayout();
             this.tbCalibration.SuspendLayout();
             this.SuspendLayout();
@@ -100,11 +106,20 @@
             this.tbCalibration.Controls.Add(this.txtCalibrateInput1, 1, 1);
             this.tbCalibration.Controls.Add(this.label4, 0, 2);
             this.tbCalibration.Controls.Add(this.label2, 0, 0);
-            this.tbCalibration.Controls.Add(this.btnSavePara, 1, 7);
+            this.tbCalibration.Controls.Add(this.label7, 0, 7);
+            this.tbCalibration.Controls.Add(this.txtCalibrateInput2Phai, 1, 7);
+            this.tbCalibration.Controls.Add(this.label8, 0, 8);
+            this.tbCalibration.Controls.Add(this.lbCalibrateIput2Phai, 1, 8);
+            this.tbCalibration.Controls.Add(this.txt2Phai, 2, 8);
+            this.tbCalibration.Controls.Add(this.btnAcpCalibrate2Phai, 1, 9);
+            this.tbCalibration.Controls.Add(this.btnSavePara, 1, 10);
             this.tbCalibration.Controls.Add(this.btnZeroValue, 2, 1);
             this.tbCalibration.Location = new System.Drawing.Point(53, 84);
             this.tbCalibration.Name = "tbCalibration";
-            this.tbCalibration.RowCount = 8;
+            this.tbCalibration.RowCount = 11;
+            this.tbCalibration.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tbCalibration.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tbCalibration.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tbCalibration.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tbCalibration.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tbCalibration.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -323,7 +338,7 @@
             this.btnSavePara.Click += new System.EventHandler(this.btnSavePara_Click_1);
             // 
             // btnZeroValue
-            // 
+            //
             this.btnZeroValue.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnZeroValue.AutoSize = true;
             this.btnZeroValue.BackColor = System.Drawing.Color.Blue;
@@ -336,7 +351,90 @@
             this.btnZeroValue.Text = "CHỐT MỐC GIÁ TRỊ 0";
             this.btnZeroValue.UseVisualStyleBackColor = false;
             this.btnZeroValue.Click += new System.EventHandler(this.btnZeroValue_Click);
-            // 
+            //
+            // label7
+            //
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Black;
+            this.label7.Location = new System.Drawing.Point(5, 671);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(308, 50);
+            this.label7.TabIndex = 59;
+            this.label7.Text = "Điểm đo chuẩn 2 - Phải";
+            this.label7.Visible = false;
+            //
+            // txtCalibrateInput2Phai
+            //
+            this.txtCalibrateInput2Phai.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtCalibrateInput2Phai.BackColor = System.Drawing.Color.White;
+            this.txtCalibrateInput2Phai.Font = new System.Drawing.Font("Calibri", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCalibrateInput2Phai.ForeColor = System.Drawing.Color.Black;
+            this.txtCalibrateInput2Phai.Location = new System.Drawing.Point(500, 671);
+            this.txtCalibrateInput2Phai.Name = "txtCalibrateInput2Phai";
+            this.txtCalibrateInput2Phai.Size = new System.Drawing.Size(302, 95);
+            this.txtCalibrateInput2Phai.TabIndex = 60;
+            this.txtCalibrateInput2Phai.Text = "10";
+            this.txtCalibrateInput2Phai.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtCalibrateInput2Phai.Visible = false;
+            //
+            // label8
+            //
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.Black;
+            this.label8.Location = new System.Drawing.Point(5, 771);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(487, 50);
+            this.label8.TabIndex = 61;
+            this.label8.Text = "Giá trị điểm đo từ thiết bị 2 - Phải";
+            this.label8.Visible = false;
+            //
+            // lbCalibrateIput2Phai
+            //
+            this.lbCalibrateIput2Phai.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lbCalibrateIput2Phai.AutoSize = true;
+            this.lbCalibrateIput2Phai.Font = new System.Drawing.Font("Calibri", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCalibrateIput2Phai.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(50)))), ((int)(((byte)(53)))));
+            this.lbCalibrateIput2Phai.Location = new System.Drawing.Point(567, 771);
+            this.lbCalibrateIput2Phai.Name = "lbCalibrateIput2Phai";
+            this.lbCalibrateIput2Phai.Size = new System.Drawing.Size(167, 88);
+            this.lbCalibrateIput2Phai.TabIndex = 62;
+            this.lbCalibrateIput2Phai.Text = "0.00";
+            this.lbCalibrateIput2Phai.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lbCalibrateIput2Phai.Visible = false;
+            //
+            // txt2Phai
+            //
+            this.txt2Phai.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txt2Phai.AutoSize = true;
+            this.txt2Phai.Font = new System.Drawing.Font("Calibri", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt2Phai.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(50)))), ((int)(((byte)(53)))));
+            this.txt2Phai.Location = new System.Drawing.Point(901, 771);
+            this.txt2Phai.Name = "txt2Phai";
+            this.txt2Phai.Size = new System.Drawing.Size(167, 88);
+            this.txt2Phai.TabIndex = 63;
+            this.txt2Phai.Text = "0.00";
+            this.txt2Phai.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.txt2Phai.Visible = false;
+            //
+            // btnAcpCalibrate2Phai
+            //
+            this.btnAcpCalibrate2Phai.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnAcpCalibrate2Phai.AutoSize = true;
+            this.btnAcpCalibrate2Phai.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAcpCalibrate2Phai.ForeColor = System.Drawing.Color.Blue;
+            this.btnAcpCalibrate2Phai.Location = new System.Drawing.Point(500, 864);
+            this.btnAcpCalibrate2Phai.Name = "btnAcpCalibrate2Phai";
+            this.btnAcpCalibrate2Phai.Size = new System.Drawing.Size(302, 69);
+            this.btnAcpCalibrate2Phai.TabIndex = 64;
+            this.btnAcpCalibrate2Phai.Text = "CHỐT GIÁ TRỊ ĐO 2 (PHẢI)";
+            this.btnAcpCalibrate2Phai.UseVisualStyleBackColor = true;
+            this.btnAcpCalibrate2Phai.Visible = false;
+            this.btnAcpCalibrate2Phai.Click += new System.EventHandler(this.btnAcpCalibrate2Phai_Click);
+            //
             // CalibrationUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -375,5 +473,11 @@
         private System.Windows.Forms.Label txt1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnZeroValue;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtCalibrateInput2Phai;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lbCalibrateIput2Phai;
+        private System.Windows.Forms.Label txt2Phai;
+        private System.Windows.Forms.Button btnAcpCalibrate2Phai;
     }
 }
