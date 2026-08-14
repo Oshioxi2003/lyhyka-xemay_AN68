@@ -83,18 +83,37 @@ namespace Lyhyka.UCT
                 return ColorConstants.InRangeColor;
             }
         }
+
+        // Độ lệch đèn dùng ngưỡng riêng theo hướng và theo dấu (dương -> trái/trên, âm -> phải/dưới),
+        // khớp với CheckLightDeviation trong RreportHelpers.cs
+        Color CheckColorDeviation(float value, float leftOrUpMin, float leftOrUpMax, float rightOrDownMin, float rightOrDownMax, float fallbackMin, float fallbackMax)
+        {
+            if (leftOrUpMin == 0 && leftOrUpMax == 0 && rightOrDownMin == 0 && rightOrDownMax == 0)
+            {
+                return CheckColor(value, fallbackMin, fallbackMax);
+            }
+
+            if (value >= 0)
+            {
+                return CheckColor(value, leftOrUpMin, leftOrUpMax);
+            }
+            else
+            {
+                return CheckColor(Math.Abs(value), rightOrDownMin, rightOrDownMax);
+            }
+        }
         public void UpdateRange()
         {
 
             txtLongRangeHeadLightIntensity.BackColor = CheckColor(GlobalVariables.TestVehicle.LongRangeLightIntensity, GlobalVariables.SelectedBrand.LongRangeLightIntensityMin, GlobalVariables.SelectedBrand.LongRangeLightIntensityMax);
-            txtHeadLightDeviationUD.BackColor = CheckColor(GlobalVariables.TestVehicle.LightDeviationUD, GlobalVariables.SelectedBrand.LightDeviationUDMin, GlobalVariables.SelectedBrand.LightDeviationUDMax);
-            txtHeadLightDeviationLR.BackColor = CheckColor(GlobalVariables.TestVehicle.LightDeviationLR, GlobalVariables.SelectedBrand.LightDeviationLRMin, GlobalVariables.SelectedBrand.LightDeviationLRMax);
+            txtHeadLightDeviationUD.BackColor = CheckColorDeviation(GlobalVariables.TestVehicle.LightDeviationUD, GlobalVariables.SelectedBrand.LightDeviationUpMin, GlobalVariables.SelectedBrand.LightDeviationUpMax, GlobalVariables.SelectedBrand.LightDeviationDownMin, GlobalVariables.SelectedBrand.LightDeviationDownMax, GlobalVariables.SelectedBrand.LightDeviationUDMin, GlobalVariables.SelectedBrand.LightDeviationUDMax);
+            txtHeadLightDeviationLR.BackColor = CheckColorDeviation(GlobalVariables.TestVehicle.LightDeviationLR, GlobalVariables.SelectedBrand.LightDeviationLeftMin, GlobalVariables.SelectedBrand.LightDeviationLeftMax, GlobalVariables.SelectedBrand.LightDeviationRightMin, GlobalVariables.SelectedBrand.LightDeviationRightMax, GlobalVariables.SelectedBrand.LightDeviationLRMin, GlobalVariables.SelectedBrand.LightDeviationLRMax);
 
 
             txtLongRangeNearLightIntensity.BackColor = CheckColor(GlobalVariables.TestVehicle.LongRangeNearLightIntensity, GlobalVariables.SelectedBrand.LongRangeNearLightIntensityMin, GlobalVariables.SelectedBrand.LongRangeNearLightIntensityMax);
-            txtNearLightDeviationUD.BackColor = CheckColor(GlobalVariables.TestVehicle.NearLightDeviationUD, GlobalVariables.SelectedBrand.LightDeviationUDMin, GlobalVariables.SelectedBrand.LightDeviationUDMax);
-            txtNearLightDeviationLR.BackColor = CheckColor(GlobalVariables.TestVehicle.NearLightDeviationLR, GlobalVariables.SelectedBrand.LightDeviationLRMin, GlobalVariables.SelectedBrand.LightDeviationLRMax);
-             
+            txtNearLightDeviationUD.BackColor = CheckColorDeviation(GlobalVariables.TestVehicle.NearLightDeviationUD, GlobalVariables.SelectedBrand.NearLightDeviationUpMin, GlobalVariables.SelectedBrand.NearLightDeviationUpMax, GlobalVariables.SelectedBrand.NearLightDeviationDownMin, GlobalVariables.SelectedBrand.NearLightDeviationDownMax, GlobalVariables.SelectedBrand.NearLightDeviationUDMin, GlobalVariables.SelectedBrand.NearLightDeviationUDMax);
+            txtNearLightDeviationLR.BackColor = CheckColorDeviation(GlobalVariables.TestVehicle.NearLightDeviationLR, GlobalVariables.SelectedBrand.NearLightDeviationLeftMin, GlobalVariables.SelectedBrand.NearLightDeviationLeftMax, GlobalVariables.SelectedBrand.NearLightDeviationRightMin, GlobalVariables.SelectedBrand.NearLightDeviationRightMax, GlobalVariables.SelectedBrand.NearLightDeviationLRMin, GlobalVariables.SelectedBrand.NearLightDeviationLRMax);
+
         }
        
 
@@ -108,7 +127,7 @@ namespace Lyhyka.UCT
         private void txtHeadLightDeviationUD_TextChanged(object sender, EventArgs e)
         {
             GlobalVariables.TestVehicle.LightDeviationUD = string.IsNullOrEmpty(txtHeadLightDeviationUD.Text) ? 0 : float.Parse(txtHeadLightDeviationUD.Text);
-            txtHeadLightDeviationUD.BackColor = CheckColor(GlobalVariables.TestVehicle.LightDeviationUD, GlobalVariables.SelectedBrand.LightDeviationUDMin, GlobalVariables.SelectedBrand.LightDeviationUDMax);
+            txtHeadLightDeviationUD.BackColor = CheckColorDeviation(GlobalVariables.TestVehicle.LightDeviationUD, GlobalVariables.SelectedBrand.LightDeviationUpMin, GlobalVariables.SelectedBrand.LightDeviationUpMax, GlobalVariables.SelectedBrand.LightDeviationDownMin, GlobalVariables.SelectedBrand.LightDeviationDownMax, GlobalVariables.SelectedBrand.LightDeviationUDMin, GlobalVariables.SelectedBrand.LightDeviationUDMax);
 
         }
 
@@ -116,7 +135,7 @@ namespace Lyhyka.UCT
         {
             GlobalVariables.TestVehicle.LightDeviationLR = string.IsNullOrEmpty(txtHeadLightDeviationLR.Text) ? 0 : float.Parse(txtHeadLightDeviationLR.Text);
 
-            txtHeadLightDeviationLR.BackColor = CheckColor(GlobalVariables.TestVehicle.LightDeviationLR, GlobalVariables.SelectedBrand.LightDeviationLRMin, GlobalVariables.SelectedBrand.LightDeviationLRMax);
+            txtHeadLightDeviationLR.BackColor = CheckColorDeviation(GlobalVariables.TestVehicle.LightDeviationLR, GlobalVariables.SelectedBrand.LightDeviationLeftMin, GlobalVariables.SelectedBrand.LightDeviationLeftMax, GlobalVariables.SelectedBrand.LightDeviationRightMin, GlobalVariables.SelectedBrand.LightDeviationRightMax, GlobalVariables.SelectedBrand.LightDeviationLRMin, GlobalVariables.SelectedBrand.LightDeviationLRMax);
         }
 
 
@@ -130,7 +149,7 @@ namespace Lyhyka.UCT
         private void txtNearLightDeviationUD_TextChanged(object sender, EventArgs e)
         {
             GlobalVariables.TestVehicle.NearLightDeviationUD = string.IsNullOrEmpty(txtNearLightDeviationUD.Text) ? 0 : float.Parse(txtNearLightDeviationUD.Text);
-            txtNearLightDeviationUD.BackColor = CheckColor(GlobalVariables.TestVehicle.NearLightDeviationUD, GlobalVariables.SelectedBrand.LightDeviationUDMin, GlobalVariables.SelectedBrand.LightDeviationUDMax);
+            txtNearLightDeviationUD.BackColor = CheckColorDeviation(GlobalVariables.TestVehicle.NearLightDeviationUD, GlobalVariables.SelectedBrand.NearLightDeviationUpMin, GlobalVariables.SelectedBrand.NearLightDeviationUpMax, GlobalVariables.SelectedBrand.NearLightDeviationDownMin, GlobalVariables.SelectedBrand.NearLightDeviationDownMax, GlobalVariables.SelectedBrand.NearLightDeviationUDMin, GlobalVariables.SelectedBrand.NearLightDeviationUDMax);
 
         }
 
@@ -138,7 +157,7 @@ namespace Lyhyka.UCT
         {
             GlobalVariables.TestVehicle.NearLightDeviationLR = string.IsNullOrEmpty(txtNearLightDeviationLR.Text) ? 0 : float.Parse(txtNearLightDeviationLR.Text);
 
-            txtNearLightDeviationLR.BackColor = CheckColor(GlobalVariables.TestVehicle.NearLightDeviationLR, GlobalVariables.SelectedBrand.LightDeviationLRMin, GlobalVariables.SelectedBrand.LightDeviationLRMax);
+            txtNearLightDeviationLR.BackColor = CheckColorDeviation(GlobalVariables.TestVehicle.NearLightDeviationLR, GlobalVariables.SelectedBrand.NearLightDeviationLeftMin, GlobalVariables.SelectedBrand.NearLightDeviationLeftMax, GlobalVariables.SelectedBrand.NearLightDeviationRightMin, GlobalVariables.SelectedBrand.NearLightDeviationRightMax, GlobalVariables.SelectedBrand.NearLightDeviationLRMin, GlobalVariables.SelectedBrand.NearLightDeviationLRMax);
         }
 
 
