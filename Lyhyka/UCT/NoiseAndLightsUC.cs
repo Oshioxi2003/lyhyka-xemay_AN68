@@ -110,7 +110,7 @@ namespace Lyhyka.UCT
             txtHeadLightDeviationLR.BackColor = CheckColor(GlobalVariables.TestVehicle.LightDeviationLR, GlobalVariables.SelectedBrand.LightDeviationLRMin, GlobalVariables.SelectedBrand.LightDeviationLRMax);
 
 
-            txtLongRangeNearLightIntensity.BackColor = CheckColor(GlobalVariables.TestVehicle.LongRangeNearLightIntensity, GlobalVariables.SelectedBrand.LongRangeLightIntensityMin, GlobalVariables.SelectedBrand.LongRangeLightIntensityMax);
+            txtLongRangeNearLightIntensity.BackColor = CheckColor(GlobalVariables.TestVehicle.LongRangeNearLightIntensity, GlobalVariables.SelectedBrand.LongRangeNearLightIntensityMin, GlobalVariables.SelectedBrand.LongRangeNearLightIntensityMax);
             txtNearLightDeviationUD.BackColor = CheckColor(GlobalVariables.TestVehicle.NearLightDeviationUD, GlobalVariables.SelectedBrand.LightDeviationUDMin, GlobalVariables.SelectedBrand.LightDeviationUDMax);
             txtNearLightDeviationLR.BackColor = CheckColor(GlobalVariables.TestVehicle.NearLightDeviationLR, GlobalVariables.SelectedBrand.LightDeviationLRMin, GlobalVariables.SelectedBrand.LightDeviationLRMax);
 
@@ -186,7 +186,7 @@ namespace Lyhyka.UCT
         {
             GlobalVariables.TestVehicle.LongRangeNearLightIntensity = string.IsNullOrEmpty(txtLongRangeNearLightIntensity.Text) ? 0 : float.Parse(txtLongRangeNearLightIntensity.Text);
 
-            txtLongRangeNearLightIntensity.BackColor = CheckColor(GlobalVariables.TestVehicle.LongRangeNearLightIntensity, GlobalVariables.SelectedBrand.LongRangeLightIntensityMin, GlobalVariables.SelectedBrand.LongRangeLightIntensityMax);
+            txtLongRangeNearLightIntensity.BackColor = CheckColor(GlobalVariables.TestVehicle.LongRangeNearLightIntensity, GlobalVariables.SelectedBrand.LongRangeNearLightIntensityMin, GlobalVariables.SelectedBrand.LongRangeNearLightIntensityMax);
             GlobalVariables.OnLightDataChanged?.Invoke();
         }
 

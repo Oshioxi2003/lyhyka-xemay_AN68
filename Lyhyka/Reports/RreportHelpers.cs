@@ -279,14 +279,14 @@ namespace Lyhyka.Reports
             reportRow["FrontSumWeight"] = (testData.WeightFront + testData.WeightRear).ToString("F0");
             reportRow["FrontLeftBrake"] = testData.BrakeForceFront.ToString("F0");
             reportRow["RearLeftBrake"] = testData.BrakeForceRear.ToString("F0");
-            reportRow["MinFrontBrake"] = GlobalFunctions.FormatRange(brand.BrakeForceFrontMax, null, "F0"); 
-            reportRow["MinRearBrake"] = GlobalFunctions.FormatRange(brand.BrakeForceRearMax, null, "F0");
+            reportRow["MinFrontBrake"] = GlobalFunctions.FormatRange(brand.BrakeForceFrontMin, null, "F0");
+            reportRow["MinRearBrake"] = GlobalFunctions.FormatRange(brand.BrakeForceRearMin, null, "F0");
             reportRow["FrontDiffBrake"] = (testData.BrakeForceFront - testData.BrakeForceRear).ToString("F0");
             // Tính trung bình lực phanh thay vì tổng
             decimal avgBrake = ((decimal)testData.BrakeForceFront + (decimal)testData.BrakeForceRear) / 2;
             reportRow["FrontSumBrake"] = avgBrake.ToString("F0");
             // Tiêu chuẩn tổng phanh
-            reportRow["BrakeSumStandard"] = GlobalFunctions.FormatRange(brand.BrakeForceSumMax, null, "F0");
+            reportRow["BrakeSumStandard"] = GlobalFunctions.FormatRange(brand.BrakeForceSumMin, null, "F0");
 
             // Pha
             reportRow["LHLIntensity"] = testData.LongRangeLightIntensity.ToString("F1");
@@ -337,21 +337,21 @@ namespace Lyhyka.Reports
 
             // Tính toán kết quả cho các phần
             bool sideSlipResult = GlobalFunctions.CheckStandard(testData.SlideSlip, brand.SlideSlipMin, brand.SlideSlipMax);
-            bool brakeFrontResult = testData.BrakeForceFront >= brand.BrakeForceFrontMax;
-            bool brakeRearResult = testData.BrakeForceRear >= brand.BrakeForceRearMax;
+            bool brakeFrontResult = testData.BrakeForceFront >= brand.BrakeForceFrontMin;
+            bool brakeRearResult = testData.BrakeForceRear >= brand.BrakeForceRearMin;
             bool brakeResult = brakeFrontResult && brakeRearResult;
-            bool brakeSumResult = (float)avgBrake >= brand.BrakeForceSumMax;
+            bool brakeSumResult = (float)avgBrake >= brand.BrakeForceSumMin;
             bool speedResult = GlobalFunctions.CheckStandard(testData.Speed, brand.SpeedMin, brand.SpeedMax);
             bool whistleResult = GlobalFunctions.CheckStandard(testData.Whistle, brand.WhistleMin, brand.WhistleMax);
             bool noiseResult = GlobalFunctions.CheckStandard(testData.Noise, brand.NoiseMin, brand.NoiseMax);
 
 
-            bool hbIntensityResult = testData.LongRangeLightIntensity >= brand.LongRangeLightIntensityMax;
+            bool hbIntensityResult = testData.LongRangeLightIntensity >= brand.LongRangeLightIntensityMin;
             bool hbLRResult = CheckLightDeviation(testData.LightDeviationLR, brand.LightDeviationLeftMin, brand.LightDeviationLeftMax, brand.LightDeviationRightMin, brand.LightDeviationRightMax, brand.LightDeviationLRMin, brand.LightDeviationLRMax);
             bool hbUDResult = CheckLightDeviation(testData.LightDeviationUD, brand.LightDeviationUpMin, brand.LightDeviationUpMax, brand.LightDeviationDownMin, brand.LightDeviationDownMax, brand.LightDeviationUDMin, brand.LightDeviationUDMax);
             bool headLightResult = hbIntensityResult && hbLRResult && hbUDResult;
 
-            bool lbIntensityResult = testData.LongRangeNearLightIntensity >= brand.LongRangeNearLightIntensityMax;
+            bool lbIntensityResult = testData.LongRangeNearLightIntensity >= brand.LongRangeNearLightIntensityMin;
             bool lbLRResult = CheckLightDeviation(testData.NearLightDeviationLR, brand.NearLightDeviationLeftMin, brand.NearLightDeviationLeftMax, brand.NearLightDeviationRightMin, brand.NearLightDeviationRightMax, brand.NearLightDeviationLRMin, brand.NearLightDeviationLRMax);
             bool lbUDResult = CheckLightDeviation(testData.NearLightDeviationUD, brand.NearLightDeviationUpMin, brand.NearLightDeviationUpMax, brand.NearLightDeviationDownMin, brand.NearLightDeviationDownMax, brand.NearLightDeviationUDMin, brand.NearLightDeviationUDMax);
             bool nearLighResult = lbIntensityResult && lbLRResult && lbUDResult;
@@ -391,8 +391,8 @@ namespace Lyhyka.Reports
             reportRow["HLResult"] = headLightResult && nearLighResult;
             reportRow["Fuel"] = coResult && hcResult;
 
-            reportRow["HBIntensityRange"] = brand.LongRangeLightIntensityMax.ToString("F0");
-            reportRow["LBIntensityRange"] = brand.LongRangeNearLightIntensityMax.ToString("F0");
+            reportRow["HBIntensityRange"] = brand.LongRangeLightIntensityMin.ToString("F0");
+            reportRow["LBIntensityRange"] = brand.LongRangeNearLightIntensityMin.ToString("F0");
 
             if (GlobalVariables.HeadLightUnitIsPercentage)
             {
