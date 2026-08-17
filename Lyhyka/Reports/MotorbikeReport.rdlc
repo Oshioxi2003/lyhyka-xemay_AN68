@@ -109,7 +109,7 @@
                                   <Value>3. Kết quả kiểm tra lực phanh</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -122,13 +122,18 @@
                           <rd:DefaultName>Textbox215</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
                               <Style>None</Style>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1.25pt</Width>
+                            </BottomBorder>
+                            <BackgroundColor>#ededed</BackgroundColor>
+                            <PaddingLeft>4pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>3pt</PaddingTop>
+                            <PaddingBottom>3pt</PaddingBottom>
                           </Style>
                         </Textbox>
                         <ColSpan>7</ColSpan>
@@ -513,6 +518,7 @@
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>=IIF(Fields!BrakeFrontResult.Value = True, "Green", "Red")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -629,6 +635,7 @@
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>=IIF(Fields!BrakeSumResult.Value = True, "Green", "Red")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -782,6 +789,7 @@
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>=IIF(Fields!BrakeRearResult.Value = True, "Green", "Red")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -934,7 +942,7 @@
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
             </Style>
           </Tablix>
@@ -970,7 +978,7 @@
                                   <Value>2. Kết quả kiểm tra tốc độ</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -983,14 +991,18 @@
                           <rd:DefaultName>Textbox211</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
                               <Style>None</Style>
-                              <Width>1.5pt</Width>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1.25pt</Width>
+                            </BottomBorder>
+                            <BackgroundColor>#ededed</BackgroundColor>
+                            <PaddingLeft>4pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>3pt</PaddingTop>
+                            <PaddingBottom>3pt</PaddingBottom>
                           </Style>
                         </Textbox>
                         <ColSpan>4</ColSpan>
@@ -1305,6 +1317,7 @@
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>=IIF(Fields!SpeedResult.Value = True, "Green", "Red")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1359,7 +1372,7 @@
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
             </Style>
           </Tablix>
@@ -1718,6 +1731,7 @@
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>=IIF(Fields!HBIntensityResult.Value = True, "Green", "Red")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1892,6 +1906,7 @@
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>=IIF(Fields!HBLRResult.Value = True, "Green", "Red")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2066,6 +2081,7 @@
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>=IIF(Fields!HBUDResult.Value = True, "Green", "Red")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2421,6 +2437,7 @@
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>=IIF(Fields!LBIntensityResult.Value = True, "Green", "Red")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2595,6 +2612,7 @@
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>=IIF(Fields!LBUDResult.Value = True, "Green", "Red")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2769,6 +2787,7 @@
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>=IIF(Fields!LBLRResult.Value = True, "Green", "Red")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2837,7 +2856,7 @@
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
               <TextAlign>Center</TextAlign>
             </Style>
@@ -2874,7 +2893,7 @@
                                   <Value>8. Kiếm tra lực siết</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -2885,13 +2904,18 @@
                           <rd:DefaultName>Textbox66</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
                               <Style>None</Style>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1.25pt</Width>
+                            </BottomBorder>
+                            <BackgroundColor>#ededed</BackgroundColor>
+                            <PaddingLeft>4pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>3pt</PaddingTop>
+                            <PaddingBottom>3pt</PaddingBottom>
                           </Style>
                         </Textbox>
                         <ColSpan>4</ColSpan>
@@ -3170,6 +3194,7 @@
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>=IIF(Fields!AxleTorqueFrontResult.Value = True, "Green", "Red")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3316,6 +3341,7 @@
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>=IIF(Fields!AxleTorqueRearResult.Value = True, "Green", "Red")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3393,6 +3419,7 @@
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>=IIF(Fields!AxleTorqueForkResult.Value = True, "Green", "Red")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3503,7 +3530,7 @@
                                   <Value>9. Kiểm tra xác suất</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -3514,13 +3541,18 @@
                           <rd:DefaultName>Textbox83</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
                               <Style>None</Style>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1.25pt</Width>
+                            </BottomBorder>
+                            <BackgroundColor>#ededed</BackgroundColor>
+                            <PaddingLeft>4pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>3pt</PaddingTop>
+                            <PaddingBottom>3pt</PaddingBottom>
                           </Style>
                         </Textbox>
                         <ColSpan>4</ColSpan>
@@ -3625,7 +3657,7 @@
             </Visibility>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
             </Style>
           </Tablix>
@@ -3651,9 +3683,9 @@
             </Paragraphs>
             <rd:DefaultName>tbFinalNoteText</rd:DefaultName>
             <Top>9.1713in</Top>
-            <Left>10.42cm</Left>
-            <Height>0.8cm</Height>
-            <Width>9.71427cm</Width>
+            <Left>13.42cm</Left>
+            <Height>1.09986cm</Height>
+            <Width>6.71427cm</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -3676,7 +3708,7 @@
                     <Value>GHI CHÚ</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -3688,9 +3720,9 @@
             </Paragraphs>
             <rd:DefaultName>tbFinalNoteHeader</rd:DefaultName>
             <Top>8.97445in</Top>
-            <Left>10.42cm</Left>
+            <Left>13.42cm</Left>
             <Height>0.5cm</Height>
-            <Width>9.71427cm</Width>
+            <Width>6.71427cm</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
@@ -3713,6 +3745,7 @@
                     <Value>KẾT QUẢ ĐÁNH GIÁ CUỐI</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>14pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -3725,13 +3758,14 @@
             <rd:DefaultName>tbFinalResultLabel</rd:DefaultName>
             <Top>8.97445in</Top>
             <Left>0.42cm</Left>
-            <Height>1.3cm</Height>
+            <Height>1.59986cm</Height>
             <Width>7cm</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
               </Border>
+              <BackgroundColor>=IIF(Fields!FinalResult.Value = True, "#E8F5E9", "#FDECEA")</BackgroundColor>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
@@ -3749,7 +3783,7 @@
                     <Value>KẾT LUẬN</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -3763,7 +3797,7 @@
             <Top>8.97445in</Top>
             <Left>7.42cm</Left>
             <Height>0.5cm</Height>
-            <Width>3cm</Width>
+            <Width>6cm</Width>
             <ZIndex>9</ZIndex>
             <Style>
               <Border>
@@ -3783,11 +3817,12 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=IIF(Fields!FinalResult.Value = True, "V", "X")</Value>
+                    <Value>=IIF(Fields!FinalResult.Value = True, "ĐẠT", "KHÔNG ĐẠT")</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontSize>20pt</FontSize>
                       <FontWeight>Bold</FontWeight>
+                      <Color>=IIF(Fields!FinalResult.Value = True, "#1B5E20", "#B71C1C")</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -3799,13 +3834,15 @@
             <rd:DefaultName>tbFinalResultValue</rd:DefaultName>
             <Top>9.1713in</Top>
             <Left>7.42cm</Left>
-            <Height>0.8cm</Height>
-            <Width>3cm</Width>
+            <Height>1.09986cm</Height>
+            <Width>6cm</Width>
             <ZIndex>10</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
+                <Width>1.5pt</Width>
               </Border>
+              <BackgroundColor>=IIF(Fields!FinalResult.Value = True, "#E8F5E9", "#FDECEA")</BackgroundColor>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
@@ -4310,7 +4347,7 @@
                                   <Value>5. Kết quả đo âm lượng còi</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -4321,13 +4358,18 @@
                           <rd:DefaultName>Textbox230</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
                               <Style>None</Style>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1.25pt</Width>
+                            </BottomBorder>
+                            <BackgroundColor>#ededed</BackgroundColor>
+                            <PaddingLeft>4pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>3pt</PaddingTop>
+                            <PaddingBottom>3pt</PaddingBottom>
                           </Style>
                         </Textbox>
                         <ColSpan>3</ColSpan>
@@ -4549,6 +4591,7 @@
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>=IIF(Fields!NoiseResult.Value = True, "Green", "Red")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -4596,7 +4639,7 @@
             <ZIndex>12</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
             </Style>
           </Tablix>
@@ -4629,7 +4672,7 @@
                                   <Value>6. Kết quả đo âm ồn</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -4640,13 +4683,18 @@
                           <rd:DefaultName>Textbox238</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
                               <Style>None</Style>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1.25pt</Width>
+                            </BottomBorder>
+                            <BackgroundColor>#ededed</BackgroundColor>
+                            <PaddingLeft>4pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>3pt</PaddingTop>
+                            <PaddingBottom>3pt</PaddingBottom>
                           </Style>
                         </Textbox>
                         <ColSpan>3</ColSpan>
@@ -4888,6 +4936,7 @@
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>=IIF(Fields!WhistleResult.Value = True, "Green", "Red")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -4935,7 +4984,7 @@
             <ZIndex>13</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
             </Style>
           </Tablix>
@@ -4983,7 +5032,7 @@
                                   <Value>7. Kết quả kiểm tra khí xả động cơ xăng</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -4994,13 +5043,18 @@
                           <rd:DefaultName>Textbox250</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
                               <Style>None</Style>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1.25pt</Width>
+                            </BottomBorder>
+                            <BackgroundColor>#ededed</BackgroundColor>
+                            <PaddingLeft>4pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>3pt</PaddingTop>
+                            <PaddingBottom>3pt</PaddingBottom>
                           </Style>
                         </Textbox>
                         <ColSpan>8</ColSpan>
@@ -5386,6 +5440,7 @@
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>=IIF(Fields!Fuel.Value = True, "Green", "Red")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -5456,6 +5511,7 @@
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>=IIF(Fields!Fuel.Value = True, "Green", "Red")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -5561,6 +5617,7 @@
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>=IIF(Fields!Fuel.Value = True, "Green", "Red")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -5919,7 +5976,7 @@
             <ZIndex>14</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
             </Style>
           </Tablix>
@@ -5955,7 +6012,7 @@
                                   <Value>4. Kết quả kiểm tra đèn chiếu sáng</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -5966,13 +6023,18 @@
                           <rd:DefaultName>Textbox149</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
                               <Style>None</Style>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1.25pt</Width>
+                            </BottomBorder>
+                            <BackgroundColor>#ededed</BackgroundColor>
+                            <PaddingLeft>4pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>3pt</PaddingTop>
+                            <PaddingBottom>3pt</PaddingBottom>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -5989,7 +6051,7 @@
                                   <Value>Quy đổi:  1mm/10m = 0.01%</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8.5pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -6022,7 +6084,7 @@
                                   <Value>Phương ngang (-) lệch trái (+) lệch phải</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8.5pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -6055,7 +6117,7 @@
                                   <Value>Phương dọc (-) lệch dưới (+) lệch trên</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8.5pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -6100,7 +6162,7 @@
             <ZIndex>15</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
             </Style>
           </Tablix>
@@ -6324,7 +6386,7 @@
             <ZIndex>16</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
             </Style>
           </Tablix>
@@ -6357,7 +6419,7 @@
                                   <Value>1. Kết quả kiểm tra trùng vết </Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -6368,13 +6430,18 @@
                           <rd:DefaultName>Textbox205</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
                               <Style>None</Style>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1.25pt</Width>
+                            </BottomBorder>
+                            <BackgroundColor>#ededed</BackgroundColor>
+                            <PaddingLeft>4pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <PaddingTop>3pt</PaddingTop>
+                            <PaddingBottom>3pt</PaddingBottom>
                           </Style>
                         </Textbox>
                         <ColSpan>3</ColSpan>
@@ -6616,6 +6683,7 @@
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>=IIF(Fields!SideSlipResult.Value = True, "Green", "Red")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -6669,7 +6737,7 @@
             <ZIndex>17</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
             </Style>
           </Tablix>
@@ -6822,7 +6890,7 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <Top>24.33499cm</Top>
+            <Top>24.96999cm</Top>
             <Left>12.86469cm</Left>
             <Height>1.8cm</Height>
             <Width>4.95592cm</Width>
