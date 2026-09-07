@@ -23,62 +23,66 @@ namespace Lyhyka.RS232
         public static bool ShowLowBeamLightIntensity = bool.Parse(ConfigurationManager.AppSettings["ShowLowBeamLightIntensity"]);
         public static bool ShowLowBeamLightDeviationLR = bool.Parse(ConfigurationManager.AppSettings["ShowLowBeamLightDeviationLR"]);
         public static bool ShowTorqueCheck = bool.Parse(ConfigurationManager.AppSettings["ShowTorqueCheck"] ?? "true");
+
+        public static string GasEmissionDevice
+        {
+            get
+            {
+                var device = ConfigurationManager.AppSettings["GasEmissionDevice"];
+                return string.IsNullOrWhiteSpace(device) ? "MQW511" : device.Trim().ToUpperInvariant();
+            }
+        }
+
+        public static void SenEmissionRequest(bool isMeasuringOilTemp = false)
+        {
+            byte[] request = { 0x03 };
+            if (gasEmissionCom != null && gasEmissionCom.serialPort != null && gasEmissionCom.serialPort.IsOpen)
+            {
+                gasEmissionCom.SendRequest(request);
+            }
+            else
+            {
+                MessageBox.Show("Cổng kết nối đo khí thải (GasEmissionCom) chưa được kết nối!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
         public static void InitializeCOMConnections()
         {
             try
             {
-
-                // Initialize COM connections for each component
-                //headlightsCom = new COMConnect("COM1", 9600, null, new SerialDataReceivedEventHandler(HeadlightsComDataReceivedHandler)); // Replace with actual port and baud rate
-                //whistleCom = new COMConnect("COM2", 9600, null, new SerialDataReceivedEventHandler(WhistleComComDataReceivedHandler)); // Replace with actual port and baud rate
-                //dieselCom = new COMConnect("COM3", 9600, null, new SerialDataReceivedEventHandler(DieselComDataReceivedHandler)); // Replace with actual port and baud rate
-                //gasEmissionCom = new COMConnect("COM4", 9600, null, new SerialDataReceivedEventHandler(GasEmissionComComDataReceivedHandler)); // Replace with actual port and baud rate
-                
                 string headLightCOM = ConfigurationManager.AppSettings["HeadLightCOM"];
 
-             
                 if (UsingMQD6A)
                 {
                     headlightsMQD6ACom = new COMConnect(headLightCOM, 9600, null, new SerialDataReceivedEventHandler(HeadlightsMQD6AComDataReceivedHandler)); // Replace with actual port and baud rate
                     headlightsMQD6ACom.OpenConnection();
-                    //headlightsMQD6ACom.SendRequest(new byte[]
-                    //{
-                    //0x02,
-                    //0x01,
-                    //0x32,
-                    //0x44,
-                    //0x43,
-                    //0x44
-                    //});
                 }
                 else
                 {
                     headlightsMQD3BCom = new COMConnect(headLightCOM, 9600, null, new SerialDataReceivedEventHandler(HeadlightsMQD3BComDataReceivedHandler)); // Replace with actual port and baud rate
                     headlightsMQD3BCom.OpenConnection();
                 }
-                // Open all connections
-                //headlightsCom.OpenConnection();
-                //whistleCom.OpenConnection();
-                //dieselCom.OpenConnection();
+
+                string gasEmissionCOM = ConfigurationManager.AppSettings["GasEmissionCOM"];
+                if (!string.IsNullOrWhiteSpace(gasEmissionCOM))
+                {
+                    gasEmissionCom = new COMConnect(gasEmissionCOM, 9600, null, new SerialDataReceivedEventHandler(GasEmissionComComDataReceivedHandler));
+                    gasEmissionCom.OpenConnection();
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi khi kết nối cổng COM: {ex.Message}");
             }
-            //gasEmissionCom.OpenConnection();
         }
         public static void CloseConnections()
         {
             if (UsingMQD6A)
-                headlightsMQD6ACom.CloseConnection();
+                headlightsMQD6ACom?.CloseConnection();
             else
-                headlightsMQD3BCom.CloseConnection();
+                headlightsMQD3BCom?.CloseConnection();
 
-            // Open all connections
-            //headlightsCom.CloseConnection();
-            //whistleCom.CloseConnection();
-            //dieselCom.CloseConnection();
-            //gasEmissionCom.CloseConnection();
+            gasEmissionCom?.CloseConnection();
         }
         private static void HeadlightsMQD3BComDataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
         {
@@ -263,20 +267,28 @@ namespace Lyhyka.RS232
         {
             try
             {
-                //Đọc các byte dữ liệu có sẵn
-                while (gasEmissionCom.serialPort.BytesToRead > 0)
+                // Đọc các byte dữ liệu có sẵn
+                while (gasEmissionCom != null && gasEmissionCom.serialPort != null && gasEmissionCom.serialPort.BytesToRead > 0)
                 {
                     byte[] buffer = new byte[gasEmissionCom.serialPort.BytesToRead];
                     gasEmissionCom.serialPort.Read(buffer, 0, buffer.Length);
                     gasEmissionCom.dataBuffer.AddRange(buffer);
                     string receivedData = BitConverter.ToString(buffer);
-                    Console.WriteLine("Received (Hex): " + receivedData);
-                    NHA506Parser.Parse(gasEmissionCom);
+                    Console.WriteLine("GasEmission Received (Hex): " + receivedData);
+
+                    if (GasEmissionDevice.Contains("MQW"))
+                    {
+                        MQW411511Parser.Parse(gasEmissionCom);
+                    }
+                    else
+                    {
+                        NHA506Parser.Parse(gasEmissionCom);
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi nhận dữ liệu:  " + ex.Message);
+                // MessageBox.Show("Lỗi nhận dữ liệu:  " + ex.Message);
             }
         }
     }

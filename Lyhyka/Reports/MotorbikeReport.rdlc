@@ -3414,7 +3414,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=IIF(Fields!AxleTorqueForkResult.Value = True, "V", "X")</Value>
+                                  <Value />
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -5984,16 +5984,16 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>5.24654cm</Width>
+                  <Width>5.98737cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>4.04037cm</Width>
+                  <Width>3.75815cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>5.22963cm</Width>
+                  <Width>5.14144cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>5.15162cm</Width>
+                  <Width>4.7812cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -6012,7 +6012,7 @@
                                   <Value>4. Kết quả kiểm tra đèn chiếu sáng</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>11pt</FontSize>
+                                    <FontSize>10.5pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -6023,11 +6023,10 @@
                           <rd:DefaultName>Textbox149</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Style>None</Style>
+                              <Style>Solid</Style>
                             </Border>
                             <BottomBorder>
                               <Color>Black</Color>
-                              <Style>Solid</Style>
                               <Width>1.25pt</Width>
                             </BottomBorder>
                             <BackgroundColor>#ededed</BackgroundColor>

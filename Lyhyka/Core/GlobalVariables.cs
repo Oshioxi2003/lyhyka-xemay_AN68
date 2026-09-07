@@ -1,4 +1,5 @@
 using Lyhyka.DBCore;
+using Lyhyka.RS232;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -15,6 +16,7 @@ namespace Lyhyka.Core
         public static Action OnSelectedBrandChanged; // Delegate to call the form 
         public static Action OnUpdatedGlobalSettingChanged; // Delegate to call the form 
         public static Action OnLightDataChanged; // Delegate to notify light form when data changes 
+        public static Action OnEmissionDataChanged; // Delegate to notify emission UI when data changes 
         public static int SelectedBrandIndex = 0;
         public static bool HeadLightUnitIsPercentage = false;
         public static TestVehicle TestVehicle { set; get; } = new TestVehicle()
@@ -23,6 +25,19 @@ namespace Lyhyka.Core
             FrameNumber = ""
         };
         public static Calibration Calibration { set; get; } 
+
+        public static void UpdateNHA506(NHA506PacketData data)
+        {
+            if (data == null || TestVehicle == null) return;
+            TestVehicle.OilTemperature = data.OT != null ? (float)data.OT.Value : 0;
+            TestVehicle.HC = data.HC != null ? (float)data.HC.Value : 0;
+            TestVehicle.CO = data.CO != null ? (float)data.CO.Value : 0;
+            TestVehicle.CO2 = data.CO2 != null ? (float)data.CO2.Value : 0;
+            TestVehicle.O2 = data.O2 != null ? (float)data.O2.Value : 0;
+            TestVehicle.NO = data.NO != null ? (float)data.NO.Value : 0;
+            TestVehicle.RPM = data.RPM != null ? (float)data.RPM.Value : 0;
+            OnEmissionDataChanged?.Invoke();
+        } 
 
         public static float SpeedZero
         {

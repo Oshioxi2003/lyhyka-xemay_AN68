@@ -1144,7 +1144,7 @@
             <Top>4.56902cm</Top>
             <Left>0.35cm</Left>
             <Height>2.4cm</Height>
-            <Width>19.66604cm</Width>
+            <Width>19.66608cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -1599,7 +1599,7 @@
             <Top>7.05567cm</Top>
             <Left>0.35cm</Left>
             <Height>1.23528cm</Height>
-            <Width>19.66604cm</Width>
+            <Width>19.66605cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -3621,7 +3621,7 @@
             <Top>13.60243cm</Top>
             <Left>0.35cm</Left>
             <Height>1.23063cm</Height>
-            <Width>19.66604cm</Width>
+            <Width>19.66606cm</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -5569,11 +5569,10 @@
                           <rd:DefaultName>Textbox133</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Style>None</Style>
+                              <Style>Solid</Style>
                             </Border>
                             <BottomBorder>
                               <Color>Black</Color>
-                              <Style>Solid</Style>
                               <Width>1.25pt</Width>
                             </BottomBorder>
                             <BackgroundColor>#ededed</BackgroundColor>
@@ -6338,7 +6337,7 @@
         <Top>0.14806in</Top>
         <Left>0.08206in</Left>
         <Height>9.62556in</Height>
-        <Width>20.01605cm</Width>
+        <Width>20.01608cm</Width>
         <Style>
           <Border>
             <Color>White</Color>

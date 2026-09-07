@@ -471,10 +471,8 @@ namespace Lyhyka
                             break;
 
                         case TagConstants.tocdo_max_batdau:
-                            //MessageBox.Show("tocdo_max_batdau: " + value); 
                             break;
                         case TagConstants.tocdo_max_ketthuc:
-                            //MessageBox.Show("tocdo_max_ketthuc: " + value);
                             break;
                         default:
                             break;
@@ -500,9 +498,7 @@ namespace Lyhyka
                     switch (handle)
                     {
                         case TagConstants.trungvet_trungvet:
-                            //MessageBox.Show("Trung vet goc :" + value);
                             var valueSlideSlip = GlobalFunctions.ConvertIntToFloat(value)-GlobalVariables.SlideSlipZero;
-                            //MessageBox.Show("Trung vet :" + valueSlideSlip.ToString());
                             SlideSlipGroupInfo.Tags[handle].Value = valueSlideSlip;
                             form.slideSlipUC.SetValue(valueSlideSlip);
                             OnCalibDataReceived?.Invoke(MenuConstants.SlideSlip, valueSlideSlip); // Gọi sự kiện để cập nhật dữ liệu
@@ -535,16 +531,6 @@ namespace Lyhyka
                                 SlideSlipGroupInfo.Max1s = new List<float>();
                             break;
                         case TagConstants.trungvet_max_ketthuc:
-                            if (bool.Parse(value))
-                            {
-                                //MessageBox.Show("Trùng vết: " + string.Join(",", SlideSlipGroupInfo.Max1s));
-                                //var average = SlideSlipGroupInfo.Max1s.Average();
-                                //SlideSlipGroupInfo.Tags[TagConstants.trungvet_max].Value = average;
-                                //form.slideSlipUC.SetConfirmValue1(average);
-                                //GlobalVariables.TestVehicle.SlideSlip = average;
-                                //OnDataReceived?.Invoke(MenuConstants.SlideSlip);
-                                //SlideSlipGroupInfo.Max1s = new List<float>();
-                            }
                             break;
                         default:
                             break;

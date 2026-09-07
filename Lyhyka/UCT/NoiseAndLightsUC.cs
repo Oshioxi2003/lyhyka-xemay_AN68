@@ -24,7 +24,21 @@ namespace Lyhyka.UCT
             SetHeadlightUnit();
             btnStartLow.Enabled= btnStartHigh.Enabled = true;
             btnStopLow.Enabled = btnStopHigh.Enabled = false;
-             
+
+            GlobalVariables.OnEmissionDataChanged += () =>
+            {
+                if (InvokeRequired)
+                    BeginInvoke(new Action(UpdateEmissionValues));
+                else
+                    UpdateEmissionValues();
+            };
+            MQW411511Parser.OnDataReceived += (isFailed) =>
+            {
+                if (InvokeRequired)
+                    BeginInvoke(new Action(UpdateEmissionValues));
+                else
+                    UpdateEmissionValues();
+            };
         }
         void SetHeadlightUnit()
         {
@@ -37,6 +51,25 @@ namespace Lyhyka.UCT
             {
                 lblFarLR.Text = lblNearLR.Text = "Độ lệch đèn L/R(mm/10m)";
                 lblFarUD.Text = lblNearUD.Text = "Độ lệch đèn U/D(mm/10m)";
+            }
+        }
+        public void UpdateEmissionValues()
+        {
+            if (GlobalVariables.TestVehicle != null)
+            {
+                txtHc.Text = GlobalVariables.TestVehicle.HC.ToString("F1");
+                txtCO.Text = GlobalVariables.TestVehicle.CO.ToString("F2");
+                txtCO2.Text = GlobalVariables.TestVehicle.CO2.ToString("F2");
+                txtO2.Text = GlobalVariables.TestVehicle.O2.ToString("F2");
+                txtNO.Text = GlobalVariables.TestVehicle.NO.ToString("F1");
+                txtRpm.Text = GlobalVariables.TestVehicle.RPM.ToString("F0");
+                txtOilTemperature.Text = GlobalVariables.TestVehicle.OilTemperature.ToString("F1");
+
+                if (GlobalVariables.SelectedBrand != null)
+                {
+                    txtHc.BackColor = CheckColor(GlobalVariables.TestVehicle.HC, GlobalVariables.SelectedBrand.HCMin, GlobalVariables.SelectedBrand.HCMax);
+                    txtCO.BackColor = CheckColor(GlobalVariables.TestVehicle.CO, GlobalVariables.SelectedBrand.COMin, GlobalVariables.SelectedBrand.COMax);
+                }
             }
         }
         public void SetCurrentValue()
@@ -63,6 +96,11 @@ namespace Lyhyka.UCT
             txtNoise.Text = GlobalVariables.TestVehicle.Noise.ToString();
             txtRealSpeed2.Text = txtRealSpeed.Text = GlobalVariables.TestVehicle.RealSpeed.ToString();
 
+            UpdateEmissionValues();
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            RS232Manager.SenEmissionRequest(true);
         }
         private void textBox_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -132,6 +170,12 @@ namespace Lyhyka.UCT
             txtLongRangeNearLightIntensity.BackColor = CheckColor(GlobalVariables.TestVehicle.LongRangeNearLightIntensity, GlobalVariables.SelectedBrand.LongRangeNearLightIntensityMin, GlobalVariables.SelectedBrand.LongRangeNearLightIntensityMax);
             txtNearLightDeviationUD.BackColor = CheckColorDeviation(GlobalVariables.TestVehicle.NearLightDeviationUD, GlobalVariables.SelectedBrand.NearLightDeviationUpMin, GlobalVariables.SelectedBrand.NearLightDeviationUpMax, GlobalVariables.SelectedBrand.NearLightDeviationDownMin, GlobalVariables.SelectedBrand.NearLightDeviationDownMax, GlobalVariables.SelectedBrand.NearLightDeviationUDMin, GlobalVariables.SelectedBrand.NearLightDeviationUDMax);
             txtNearLightDeviationLR.BackColor = CheckColorDeviation(GlobalVariables.TestVehicle.NearLightDeviationLR, GlobalVariables.SelectedBrand.NearLightDeviationLeftMin, GlobalVariables.SelectedBrand.NearLightDeviationLeftMax, GlobalVariables.SelectedBrand.NearLightDeviationRightMin, GlobalVariables.SelectedBrand.NearLightDeviationRightMax, GlobalVariables.SelectedBrand.NearLightDeviationLRMin, GlobalVariables.SelectedBrand.NearLightDeviationLRMax);
+
+            if (GlobalVariables.SelectedBrand != null)
+            {
+                txtHc.BackColor = CheckColor(GlobalVariables.TestVehicle.HC, GlobalVariables.SelectedBrand.HCMin, GlobalVariables.SelectedBrand.HCMax);
+                txtCO.BackColor = CheckColor(GlobalVariables.TestVehicle.CO, GlobalVariables.SelectedBrand.COMin, GlobalVariables.SelectedBrand.COMax);
+            }
 
             SetVisibleAccordingToVehicleType();
         }

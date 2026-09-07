@@ -1,4 +1,5 @@
-﻿using System;
+using Lyhyka.Core;
+using System;
 using System.Linq;
 
 namespace Lyhyka.RS232
@@ -6,24 +7,34 @@ namespace Lyhyka.RS232
     public class NHA506Parser
     {
         public static Action<NHA506PacketData> OnDataReceived; // Delegate to call the form 
+        private const int FrameLength = 21;
+
         public static void Parse(COMConnect gasEmissionCom)
         { 
-            if (gasEmissionCom.dataBuffer.Count >= 21 && gasEmissionCom.dataBuffer[0] == 0x06)
+            // Tìm vị trí đầu tiên của byte 0x06
+            int index = gasEmissionCom.dataBuffer.IndexOf(0x06);
+            if (index >= 0)
             {
-                byte[] completeData = gasEmissionCom.dataBuffer.Take(21).ToArray();
+                gasEmissionCom.dataBuffer = gasEmissionCom.dataBuffer.GetRange(index, gasEmissionCom.dataBuffer.Count - index);
+            }
+
+            if (gasEmissionCom.dataBuffer.Count >= FrameLength)
+            {
+                byte[] completeData = gasEmissionCom.dataBuffer.Take(FrameLength).ToArray();
                 var data = Process(completeData);
-                if(data !=null)
+                if (data != null)
                 {
+                    GlobalVariables.UpdateNHA506(data);
                     OnDataReceived?.Invoke(data);
                 }    
-                gasEmissionCom.dataBuffer.RemoveRange(0, 21);
+                gasEmissionCom.dataBuffer.RemoveRange(0, FrameLength);
             }
         }
+
         public static NHA506PacketData Process(byte[] data)
         {
-            if (data.Length == 21 && data[0] == 0x06)
+            if (data.Length >= 21 && data[0] == 0x06)
             {
-
                 // Xử lý từng giá trị từ gói dữ liệu
                 double? hcValue = ConvertToDouble(data[1], data[2], 1); // Không chia scale
                 double? coValue = ConvertToDouble(data[3], data[4], 100);
@@ -32,8 +43,9 @@ namespace Lyhyka.RS232
                 double? noValue = ConvertToDouble(data[9], data[10], 100);
                 double? otValue = ConvertToDouble(data[11], data[12], 1); // Không chia scale
                 double? rpmValue = ConvertToDouble(data[13], data[14], 1); // Không chia scale
+                double? lambdaValue = data.Length >= 17 ? ConvertToDouble(data[15], data[16], 100) : null;
 
-                return new  NHA506PacketData()
+                return new NHA506PacketData()
                 {
                     HC = hcValue,
                     CO = coValue,
@@ -41,7 +53,8 @@ namespace Lyhyka.RS232
                     O2 = o2Value,
                     NO = noValue,
                     OT = otValue,
-                    RPM = rpmValue
+                    RPM = rpmValue,
+                    Lambda = lambdaValue
                 };
             }
             return null;
@@ -68,15 +81,16 @@ namespace Lyhyka.RS232
             return value / scale;
         }
     }
+
     public class NHA506PacketData
     {
         public double? HC { set; get; }
-
         public double? CO { set; get; }
         public double? CO2 { set; get; }
         public double? O2 { set; get; }
         public double? NO { set; get; }
         public double? OT { set; get; }
         public double? RPM { set; get; }
+        public double? Lambda { set; get; }
     }
 }
