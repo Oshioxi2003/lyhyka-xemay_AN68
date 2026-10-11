@@ -32,7 +32,7 @@ namespace Lyhyka.UCT
                 else
                     UpdateEmissionValues();
             };
-            MQW411511Parser.OnDataReceived += (isFailed) =>
+            MQW511Parser.OnDataReceived += (isFailed) =>
             {
                 if (InvokeRequired)
                     BeginInvoke(new Action(UpdateEmissionValues));

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Lyhyka.RS232
 {
-    public class MQW411511Parser
+    public class MQW511Parser
     {
         public static Action<bool> OnDataReceived; // Delegate to notify listeners (UI)
 
@@ -90,7 +90,7 @@ namespace Lyhyka.RS232
 
         public static NHA506PacketData Process17Byte(byte[] data)
         {
-            // MQW-411511 4-gas layout (17 bytes):
+            // MQW 4-gas layout (17 bytes):
             // 0: ACK (0x06)
             // 1,2: HC
             // 3,4: CO
@@ -124,7 +124,7 @@ namespace Lyhyka.RS232
 
         public static NHA506PacketData Process19Byte(byte[] data)
         {
-            // MQW-411511 5-gas layout (19 bytes):
+            // MQW 5-gas layout (19 bytes):
             // 0: ACK (0x06)
             // 1,2: HC
             // 3,4: CO

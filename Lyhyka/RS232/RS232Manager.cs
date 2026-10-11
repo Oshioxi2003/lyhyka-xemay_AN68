@@ -278,7 +278,7 @@ namespace Lyhyka.RS232
 
                     if (GasEmissionDevice.Contains("MQW"))
                     {
-                        MQW411511Parser.Parse(gasEmissionCom);
+                        MQW511Parser.Parse(gasEmissionCom);
                     }
                     else
                     {

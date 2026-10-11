@@ -126,7 +126,6 @@ namespace Lyhyka.UCT
             this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraTabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.xtraTabControl1.Name = "xtraTabControl1";
-            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
             this.xtraTabControl1.Size = new System.Drawing.Size(694, 469);
             this.xtraTabControl1.TabIndex = 2;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
@@ -252,7 +251,7 @@ namespace Lyhyka.UCT
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNoise.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(50)))), ((int)(((byte)(53)))));
             this.btnNoise.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNoise.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNoise.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNoise.ForeColor = System.Drawing.Color.White;
             this.btnNoise.Location = new System.Drawing.Point(275, 0);
             this.btnNoise.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -518,7 +517,7 @@ namespace Lyhyka.UCT
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnWhistle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(50)))), ((int)(((byte)(53)))));
             this.btnWhistle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnWhistle.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnWhistle.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnWhistle.ForeColor = System.Drawing.Color.White;
             this.btnWhistle.Location = new System.Drawing.Point(275, 0);
             this.btnWhistle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -563,7 +562,7 @@ namespace Lyhyka.UCT
             this.btnStopHigh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(50)))), ((int)(((byte)(53)))));
             this.btnStopHigh.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStopHigh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStopHigh.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStopHigh.Font = new System.Drawing.Font("Calibri", 9.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStopHigh.ForeColor = System.Drawing.Color.White;
             this.btnStopHigh.Location = new System.Drawing.Point(135, 0);
             this.btnStopHigh.Margin = new System.Windows.Forms.Padding(0);
@@ -642,7 +641,6 @@ namespace Lyhyka.UCT
             this.txtRealSpeed.TabIndex = 40;
             this.txtRealSpeed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtRealSpeed.TextChanged += new System.EventHandler(this.textRealSpeed_TextChanged);
-            this.txtRealSpeed2.TextChanged += new System.EventHandler(this.textRealSpeed2_TextChanged);
             // 
             // label2
             // 
@@ -1179,6 +1177,7 @@ namespace Lyhyka.UCT
             this.txtRealSpeed2.Size = new System.Drawing.Size(338, 36);
             this.txtRealSpeed2.TabIndex = 46;
             this.txtRealSpeed2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtRealSpeed2.TextChanged += new System.EventHandler(this.textRealSpeed2_TextChanged);
             // 
             // NoiseAndLightsUC
             // 
@@ -1191,28 +1190,28 @@ namespace Lyhyka.UCT
             this.Name = "NoiseAndLightsUC";
             this.Size = new System.Drawing.Size(694, 469);
             this.Load += new System.EventHandler(this.NoiseAndLightsUC_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
-            this.xtraTabControl1.ResumeLayout(false);
-            this.xtraTabPage1.ResumeLayout(false);
-            this.tbVehicleInfo.ResumeLayout(false);
-            this.tbVehicleInfo.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
-            this.ElectricTab.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.panel1.ResumeLayout(false);
+            this.tbVehicleInfo.ResumeLayout(false);
+            this.tbVehicleInfo.PerformLayout();
+            this.xtraTabPage1.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
-            this.GasTab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
-            this.panelControl2.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.ElectricTab.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
+            this.panelControl2.ResumeLayout(false);
+            this.GasTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
+            this.xtraTabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
