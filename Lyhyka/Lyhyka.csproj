@@ -1019,6 +1019,9 @@
     <Content Include="AN68.ico" />
     <Content Include="ILLink\ILLink.Descriptors.LibraryBuild.xml" />
     <Content Include="Image\Logo_sentek.ico" />
+    <Content Include="Image\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Image\QR_Sentek.png" />
     <Content Include="Logo_sentek.ico" />
     <None Include="Resources\z6809962917592_c332b33ffb1a03f593c234cbb87b327e.jpg" />

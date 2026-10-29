@@ -175,6 +175,8 @@ namespace Lyhyka.UCT
             {
                 txtHc.BackColor = CheckColor(GlobalVariables.TestVehicle.HC, GlobalVariables.SelectedBrand.HCMin, GlobalVariables.SelectedBrand.HCMax);
                 txtCO.BackColor = CheckColor(GlobalVariables.TestVehicle.CO, GlobalVariables.SelectedBrand.COMin, GlobalVariables.SelectedBrand.COMax);
+                txtRealSpeed.BackColor = CheckColor(GlobalVariables.TestVehicle.RealSpeed, GlobalVariables.SelectedBrand.SpeedMin, GlobalVariables.SelectedBrand.SpeedMax);
+                txtRealSpeed2.BackColor = CheckColor(GlobalVariables.TestVehicle.RealSpeed, GlobalVariables.SelectedBrand.SpeedMin, GlobalVariables.SelectedBrand.SpeedMax);
             }
 
             SetVisibleAccordingToVehicleType();
@@ -430,11 +432,21 @@ namespace Lyhyka.UCT
 
         private void textRealSpeed_TextChanged(object sender, EventArgs e)
         {
-            GlobalVariables.TestVehicle.RealSpeed = string.IsNullOrEmpty(txtRealSpeed.Text) ? 0 : float.Parse(txtRealSpeed.Text);
+            float val;
+            GlobalVariables.TestVehicle.RealSpeed = float.TryParse(txtRealSpeed.Text, out val) ? val : 0;
+            if (GlobalVariables.SelectedBrand != null)
+            {
+                txtRealSpeed.BackColor = CheckColor(GlobalVariables.TestVehicle.RealSpeed, GlobalVariables.SelectedBrand.SpeedMin, GlobalVariables.SelectedBrand.SpeedMax);
+            }
         }
         private void textRealSpeed2_TextChanged(object sender, EventArgs e)
         {
-            GlobalVariables.TestVehicle.RealSpeed = string.IsNullOrEmpty(txtRealSpeed2.Text) ? 0 : float.Parse(txtRealSpeed2.Text);
+            float val;
+            GlobalVariables.TestVehicle.RealSpeed = float.TryParse(txtRealSpeed2.Text, out val) ? val : 0;
+            if (GlobalVariables.SelectedBrand != null)
+            {
+                txtRealSpeed2.BackColor = CheckColor(GlobalVariables.TestVehicle.RealSpeed, GlobalVariables.SelectedBrand.SpeedMin, GlobalVariables.SelectedBrand.SpeedMax);
+            }
         }
     }
 }

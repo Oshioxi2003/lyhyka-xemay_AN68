@@ -6186,6 +6186,23 @@
                       <CellContents>
                         <Rectangle Name="rectCompanyHeader">
                           <ReportItems>
+                            <Image Name="imgCompanyLogoExt">
+                              <Source>External</Source>
+                              <Value>=First(Fields!ImagePath.Value, "VehicleDataSet")</Value>
+                              <Sizing>FitProportional</Sizing>
+                              <Top>0.15cm</Top>
+                              <Left>0.05cm</Left>
+                              <Height>0.95cm</Height>
+                              <Width>1.5cm</Width>
+                              <Visibility>
+                                <Hidden>=IIf(First(Fields!ImageVisible.Value, "VehicleDataSet") = 1, False, True)</Hidden>
+                              </Visibility>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                              </Style>
+                            </Image>
                             <Image Name="imgCompanyLogo">
                               <Source>Embedded</Source>
                               <Value>companyLogo</Value>
@@ -6195,6 +6212,9 @@
                               <Left>0.05cm</Left>
                               <Height>0.95cm</Height>
                               <Width>1.5cm</Width>
+                              <Visibility>
+                                <Hidden>=IIf(First(Fields!ImageVisible.Value, "VehicleDataSet") = 1, True, False)</Hidden>
+                              </Visibility>
                               <Style>
                                 <Border>
                                   <Style>None</Style>

@@ -232,14 +232,55 @@ namespace Lyhyka.Reports
             string vehicleType = brand.Name;
             string company = ConfigurationManager.AppSettings["Company"];
             string imagePath = ConfigurationManager.AppSettings["ImagePath"];
+
+            // Tự động phân giải đường dẫn ảnh logo ngoài
+            string resolvedImagePath = null;
+            if (!string.IsNullOrWhiteSpace(imagePath))
+            {
+                if (System.IO.Path.IsPathRooted(imagePath))
+                {
+                    resolvedImagePath = imagePath;
+                }
+                else
+                {
+                    resolvedImagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, imagePath);
+                }
+            }
+
+            // Nếu chưa cấu hình hoặc file không tồn tại, tự động kiểm tra Image\logo.png hoặc logo.png trong thư mục cài đặt
+            if (string.IsNullOrEmpty(resolvedImagePath) || !System.IO.File.Exists(resolvedImagePath))
+            {
+                string defaultImg = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Image", "logo.png");
+                if (System.IO.File.Exists(defaultImg))
+                {
+                    resolvedImagePath = defaultImg;
+                }
+                else
+                {
+                    string rootImg = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logo.png");
+                    if (System.IO.File.Exists(rootImg))
+                    {
+                        resolvedImagePath = rootImg;
+                    }
+                }
+            }
+
             // Thêm dữ liệu vào DataTable
             DataRow reportRow = reportDataTable.NewRow();
             reportRow["Company"] = company;
              
-            if (!string.IsNullOrEmpty(imagePath))
+            if (!string.IsNullOrEmpty(resolvedImagePath) && System.IO.File.Exists(resolvedImagePath))
             {
-                reportRow["ImagePath"] = new Uri(imagePath).AbsoluteUri;
-                reportRow["ImageVisible"] = 1;
+                try
+                {
+                    reportRow["ImagePath"] = new Uri(resolvedImagePath).AbsoluteUri;
+                    reportRow["ImageVisible"] = 1;
+                }
+                catch
+                {
+                    reportRow["ImagePath"] = "";
+                    reportRow["ImageVisible"] = 0;
+                }
             }
             else
             {
@@ -341,7 +382,9 @@ namespace Lyhyka.Reports
             bool brakeRearResult = testData.BrakeForceRear >= brand.BrakeForceRearMin;
             bool brakeResult = brakeFrontResult && brakeRearResult;
             bool brakeSumResult = (float)avgBrake >= brand.BrakeForceSumMin;
-            bool speedResult = GlobalFunctions.CheckStandard(testData.Speed, brand.SpeedMin, brand.SpeedMax);
+            bool speedDeviceResult = GlobalFunctions.CheckStandard(testData.Speed, brand.SpeedMin, brand.SpeedMax);
+            bool speedRealResult = GlobalFunctions.CheckStandard(testData.RealSpeed, brand.SpeedMin, brand.SpeedMax);
+            bool speedResult = speedDeviceResult && speedRealResult;
             bool whistleResult = GlobalFunctions.CheckStandard(testData.Whistle, brand.WhistleMin, brand.WhistleMax);
             bool noiseResult = GlobalFunctions.CheckStandard(testData.Noise, brand.NoiseMin, brand.NoiseMax);
 
