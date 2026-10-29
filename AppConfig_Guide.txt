@@ -131,7 +131,6 @@ Giải thích:
 - Thông tin mẫu của khoảng cách trục SpeedMoving
 
 ********************
-<appSettings>
     <add key="WeightCheckTimeout" value="30" />
     <add key="X2_Line" value="1"/>
 </appSettings>
@@ -139,6 +138,18 @@ Giải thích:
 Giải thích:
 - WeightCheckTimeout: khai báo thời gian bỏ qua nối Trạm Trọng Lượng lỗi.
 - X2_Line: Khai báo Line của X2: Line 1: 1/ Line 2: 2
+
+********************
+<appSettings>
+    <!-- Cấu hình mẫu báo cáo: "New" (hoặc "Moi" - Mẫu mới) / "Old" (hoặc "Cu" - Mẫu cũ) -->
+    <add key="ReportTemplate" value="New" />
+</appSettings>
+
+Giải thích:
+- ReportTemplate:
+  + "New" (hoặc "Moi", "Mới", "MauMoi", "Mẫu mới", hoặc để trống): Sử dụng mẫu báo cáo mới (ElectricBicycleReport.rdlc / MotorbikeReport.rdlc).
+  + "Old" (hoặc "Cu", "Cũ", "MauCu", "Mẫu cũ"): Sử dụng mẫu báo cáo cũ (ElectricBicycleReport_Old.rdlc / MotorbikeReport_Old.rdlc).
+
 
 3. <connectionStrings>
 ----------------------

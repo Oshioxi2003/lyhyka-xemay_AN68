@@ -885,7 +885,11 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Reports\MotorbikeReport.rdlc" />
+    <EmbeddedResource Include="Reports\MotorbikeReport_Old.rdlc" />
     <EmbeddedResource Include="Reports\ElectricBicycleReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ElectricBicycleReport_Old.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="TestReport.resx">

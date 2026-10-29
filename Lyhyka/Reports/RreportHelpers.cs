@@ -323,9 +323,9 @@ namespace Lyhyka.Reports
             reportRow["MinFrontBrake"] = GlobalFunctions.FormatRange(brand.BrakeForceFrontMin, null, "F0");
             reportRow["MinRearBrake"] = GlobalFunctions.FormatRange(brand.BrakeForceRearMin, null, "F0");
             reportRow["FrontDiffBrake"] = (testData.BrakeForceFront - testData.BrakeForceRear).ToString("F0");
-            // Tính trung bình lực phanh thay vì tổng
-            decimal avgBrake = ((decimal)testData.BrakeForceFront + (decimal)testData.BrakeForceRear) / 2;
-            reportRow["FrontSumBrake"] = avgBrake.ToString("F0");
+            // Tổng lực phanh = phanh trước + phanh sau
+            decimal sumBrake = (decimal)testData.BrakeForceFront + (decimal)testData.BrakeForceRear;
+            reportRow["FrontSumBrake"] = sumBrake.ToString("F0");
             // Tiêu chuẩn tổng phanh
             reportRow["BrakeSumStandard"] = GlobalFunctions.FormatRange(brand.BrakeForceSumMin, null, "F0");
 
@@ -381,7 +381,7 @@ namespace Lyhyka.Reports
             bool brakeFrontResult = testData.BrakeForceFront >= brand.BrakeForceFrontMin;
             bool brakeRearResult = testData.BrakeForceRear >= brand.BrakeForceRearMin;
             bool brakeResult = brakeFrontResult && brakeRearResult;
-            bool brakeSumResult = (float)avgBrake >= brand.BrakeForceSumMin;
+            bool brakeSumResult = (float)sumBrake >= brand.BrakeForceSumMin;
             bool speedDeviceResult = GlobalFunctions.CheckStandard(testData.Speed, brand.SpeedMin, brand.SpeedMax);
             bool speedRealResult = GlobalFunctions.CheckStandard(testData.RealSpeed, brand.SpeedMin, brand.SpeedMax);
             bool speedResult = speedDeviceResult && speedRealResult;

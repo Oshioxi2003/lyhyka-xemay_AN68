@@ -2,6 +2,7 @@ using Lyhyka.Core;
 using Lyhyka.DBCore;
 using Microsoft.Reporting.WinForms;
 using System;
+using System.Configuration;
 using System.Data;
 using System.Globalization;
 using System.IO;
@@ -12,17 +13,37 @@ namespace Lyhyka
 {
     public partial class TestReport : Form
     {
-        string reportName = "Lyhyka.Reports.MotorbikeReport.rdlc";
+        private string reportName = "Lyhyka.Reports.MotorbikeReport.rdlc";
         private DataTable reportData;
        
         public TestReport(DataTable data)
         {
             InitializeComponent();
             reportData = data;
-            if(GlobalVariables.IsElectricMotorbike)
+            reportName = GetReportResourceName();
+        }
+
+        private string GetReportResourceName()
+        {
+            string templateSetting = ConfigurationManager.AppSettings["ReportTemplate"];
+            bool isOld = false;
+            if (!string.IsNullOrWhiteSpace(templateSetting))
             {
-                reportName = "Lyhyka.Reports.ElectricBicycleReport.rdlc";
-            }    
+                string s = templateSetting.Trim().ToLowerInvariant();
+                if (s == "old" || s == "cu" || s == "cũ" || s == "maucu" || s == "maucũ" || s == "mẫu cũ" || s == "legacy" || s == "0")
+                {
+                    isOld = true;
+                }
+            }
+
+            if (GlobalVariables.IsElectricMotorbike)
+            {
+                return isOld ? "Lyhyka.Reports.ElectricBicycleReport_Old.rdlc" : "Lyhyka.Reports.ElectricBicycleReport.rdlc";
+            }
+            else
+            {
+                return isOld ? "Lyhyka.Reports.MotorbikeReport_Old.rdlc" : "Lyhyka.Reports.MotorbikeReport.rdlc";
+            }
         }
        
         private void TestReport_Load(object sender, EventArgs e)
@@ -53,7 +74,7 @@ namespace Lyhyka
                 reportViewer1.RefreshReport();
 
                 // Log sau khi in thành công
-                WriteLog($"Xuất report thành công với {safeData.Rows.Count} dòng lúc {DateTime.Now}");
+                WriteLog($"Xuất report [{reportName}] thành công với {safeData.Rows.Count} dòng lúc {DateTime.Now}");
             }
             catch (Exception ex)
             {
