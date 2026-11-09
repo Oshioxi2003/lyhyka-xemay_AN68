@@ -65,6 +65,8 @@ namespace Lyhyka.Forms.Motobikes
 
             gridView.Columns["EngineNumber"].Caption = "Số máy";
             gridView.Columns["FrameNumber"].Caption = "Số khung";
+            if (gridView.Columns["VehicleColor"] != null)
+                gridView.Columns["VehicleColor"].Caption = "Màu sắc";
             gridView.Columns["VehicleType"].Caption = "Loại xe";
             gridView.Columns["Tester"].Caption = "Người test";
             gridView.Columns["TestedDateTime"].Caption = "Ngày test";

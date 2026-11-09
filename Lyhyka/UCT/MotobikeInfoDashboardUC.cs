@@ -141,6 +141,7 @@ namespace Lyhyka.UCT
 
             // Tạo thêm fields nhập thông tin xe
             CreateExtraVehicleInfoFields();
+            txtColor.Text = GlobalVariables.TestVehicle.VehicleColor ?? "";
         }
 
         private void CreateExtraVehicleInfoFields()
@@ -152,8 +153,6 @@ namespace Lyhyka.UCT
                     GlobalVariables.TestVehicle.CertificateNumber = GlobalVariables.SelectedBrand.CertificateNumber ?? "";
                 if (string.IsNullOrEmpty(GlobalVariables.TestVehicle.VehicleBrandName))
                     GlobalVariables.TestVehicle.VehicleBrandName = GlobalVariables.SelectedBrand.VehicleBrandName ?? "";
-                if (string.IsNullOrEmpty(GlobalVariables.TestVehicle.VehicleColor))
-                    GlobalVariables.TestVehicle.VehicleColor = GlobalVariables.SelectedBrand.VehicleColor ?? "";
             }
         }
 
@@ -178,6 +177,7 @@ namespace Lyhyka.UCT
         {
             txtVin.Text = GlobalVariables.TestVehicle.EngineNumber;
             txtFrameNumber.Text = GlobalVariables.TestVehicle.FrameNumber;
+            txtColor.Text = GlobalVariables.TestVehicle.VehicleColor;
             cboBrand.Text = GlobalVariables.TestVehicle.VehicleType;
             cboTester.Text = GlobalVariables.TestVehicle.Tester;
         }
@@ -188,6 +188,10 @@ namespace Lyhyka.UCT
         private void txtFrameNumber_TextChanged(object sender, EventArgs e)
         {
             GlobalVariables.TestVehicle.FrameNumber = txtFrameNumber.Text.Trim();
+        }
+        private void txtColor_TextChanged(object sender, EventArgs e)
+        {
+            GlobalVariables.TestVehicle.VehicleColor = txtColor.Text.Trim();
         }
 
         private void cboBrand_SelectedIndexChanged(object sender, EventArgs e)

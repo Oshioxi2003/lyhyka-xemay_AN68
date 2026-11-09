@@ -78,6 +78,10 @@ namespace Lyhyka.UCT
             this.txtVin = new System.Windows.Forms.TextBox();
             this.panel24 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel26 = new System.Windows.Forms.Panel();
+            this.lbColorTitle = new System.Windows.Forms.Label();
+            this.panel27 = new System.Windows.Forms.Panel();
+            this.txtColor = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel15.SuspendLayout();
             this.panel16.SuspendLayout();
@@ -107,6 +111,8 @@ namespace Lyhyka.UCT
             this.panel20.SuspendLayout();
             this.panel23.SuspendLayout();
             this.panel24.SuspendLayout();
+            this.panel26.SuspendLayout();
+            this.panel27.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel2
@@ -628,24 +634,27 @@ namespace Lyhyka.UCT
             this.tbVehicleInfo.ColumnCount = 2;
             this.tbVehicleInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tbVehicleInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tbVehicleInfo.Controls.Add(this.panel22, 1, 2);
-            this.tbVehicleInfo.Controls.Add(this.lbInspectorTitle, 0, 3);
             this.tbVehicleInfo.Controls.Add(this.lbSerialNumTitle, 0, 0);
-            this.tbVehicleInfo.Controls.Add(this.lbTypeCarTitle, 0, 2);
             this.tbVehicleInfo.Controls.Add(this.panel18, 1, 0);
-            this.tbVehicleInfo.Controls.Add(this.panel20, 1, 3);
-            this.tbVehicleInfo.Controls.Add(this.panel23, 1, 1);
             this.tbVehicleInfo.Controls.Add(this.panel24, 0, 1);
+            this.tbVehicleInfo.Controls.Add(this.panel23, 1, 1);
+            this.tbVehicleInfo.Controls.Add(this.panel26, 0, 2);
+            this.tbVehicleInfo.Controls.Add(this.panel27, 1, 2);
+            this.tbVehicleInfo.Controls.Add(this.lbTypeCarTitle, 0, 3);
+            this.tbVehicleInfo.Controls.Add(this.panel22, 1, 3);
+            this.tbVehicleInfo.Controls.Add(this.lbInspectorTitle, 0, 4);
+            this.tbVehicleInfo.Controls.Add(this.panel20, 1, 4);
             this.tbVehicleInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbVehicleInfo.Font = new System.Drawing.Font("Calibri", 18F);
             this.tbVehicleInfo.Location = new System.Drawing.Point(0, 0);
             this.tbVehicleInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbVehicleInfo.Name = "tbVehicleInfo";
-            this.tbVehicleInfo.RowCount = 4;
-            this.tbVehicleInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tbVehicleInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tbVehicleInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tbVehicleInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tbVehicleInfo.RowCount = 5;
+            this.tbVehicleInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tbVehicleInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tbVehicleInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tbVehicleInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tbVehicleInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tbVehicleInfo.Size = new System.Drawing.Size(401, 243);
             this.tbVehicleInfo.TabIndex = 10;
             // 
@@ -804,6 +813,53 @@ namespace Lyhyka.UCT
             this.label1.Text = "Số máy";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // panel26
+            // 
+            this.panel26.Controls.Add(this.lbColorTitle);
+            this.panel26.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel26.Location = new System.Drawing.Point(3, 98);
+            this.panel26.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel26.Name = "panel26";
+            this.panel26.Size = new System.Drawing.Size(154, 44);
+            this.panel26.TabIndex = 41;
+            // 
+            // lbColorTitle
+            // 
+            this.lbColorTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbColorTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.lbColorTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbColorTitle.ForeColor = System.Drawing.Color.Black;
+            this.lbColorTitle.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lbColorTitle.Location = new System.Drawing.Point(0, 5);
+            this.lbColorTitle.Name = "lbColorTitle";
+            this.lbColorTitle.Size = new System.Drawing.Size(154, 34);
+            this.lbColorTitle.TabIndex = 1;
+            this.lbColorTitle.Text = "Màu sắc";
+            this.lbColorTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel27
+            // 
+            this.panel27.Controls.Add(this.txtColor);
+            this.panel27.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel27.Location = new System.Drawing.Point(163, 98);
+            this.panel27.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel27.Name = "panel27";
+            this.panel27.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
+            this.panel27.Size = new System.Drawing.Size(235, 44);
+            this.panel27.TabIndex = 42;
+            // 
+            // txtColor
+            // 
+            this.txtColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtColor.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtColor.Location = new System.Drawing.Point(0, 5);
+            this.txtColor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtColor.Name = "txtColor";
+            this.txtColor.Size = new System.Drawing.Size(234, 36);
+            this.txtColor.TabIndex = 34;
+            this.txtColor.TextChanged += new System.EventHandler(this.txtColor_TextChanged);
+            // 
             // MotobikeInfoDashboardUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -847,6 +903,9 @@ namespace Lyhyka.UCT
             this.panel23.ResumeLayout(false);
             this.panel23.PerformLayout();
             this.panel24.ResumeLayout(false);
+            this.panel26.ResumeLayout(false);
+            this.panel27.ResumeLayout(false);
+            this.panel27.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -900,6 +959,10 @@ namespace Lyhyka.UCT
         private DevExpress.XtraEditors.SimpleButton btnSpeed;
         private System.Windows.Forms.Panel panel24;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel26;
+        private System.Windows.Forms.Label lbColorTitle;
+        private System.Windows.Forms.Panel panel27;
+        public System.Windows.Forms.TextBox txtColor;
         private System.Windows.Forms.Panel panel25;
         private DevExpress.XtraEditors.SimpleButton btnHeadlight;
     }

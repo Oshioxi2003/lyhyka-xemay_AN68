@@ -36,7 +36,6 @@ namespace Lyhyka.Forms
         // Thông tin xe mặc định
         private TextBox txtDefaultCertificateNumber = new TextBox();
         private TextBox txtDefaultVehicleBrandName = new TextBox();
-        private TextBox txtDefaultVehicleColor = new TextBox();
 
         // Đèn pha (HB) - per-direction min/max
         private TextBox txtHBLeftMin = new TextBox();
@@ -129,7 +128,6 @@ namespace Lyhyka.Forms
                 // Thông tin xe mặc định
                 txtDefaultCertificateNumber.Text = _brand.CertificateNumber ?? "";
                 txtDefaultVehicleBrandName.Text = _brand.VehicleBrandName ?? "";
-                txtDefaultVehicleColor.Text = _brand.VehicleColor ?? "";
 
                 // Per-direction deviation - HB
                 txtHBLeftMin.Text = _brand.LightDeviationLeftMin.ToString();
@@ -311,7 +309,7 @@ namespace Lyhyka.Forms
             // Tạo panel mới cho các thiết lập bổ sung
             var extraPanel = new Panel();
             extraPanel.Dock = DockStyle.Bottom;
-            extraPanel.Height = 340;
+            extraPanel.Height = 315;
             extraPanel.BorderStyle = BorderStyle.FixedSingle;
 
             var extraTable = new TableLayoutPanel();
@@ -321,8 +319,8 @@ namespace Lyhyka.Forms
             extraTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15F));
             extraTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35F));
             extraTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15F));
-            extraTable.RowCount = 12;
-            for (int i = 0; i < 12; i++)
+            extraTable.RowCount = 11;
+            for (int i = 0; i < 11; i++)
                 extraTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
 
             var headerFont = new Font("Microsoft Sans Serif", 10F, FontStyle.Bold);
@@ -354,7 +352,6 @@ namespace Lyhyka.Forms
 
             AddFullWidthRow(extraTable, 9, "Số GCNR:", txtDefaultCertificateNumber, labelFont, textFont);
             AddFullWidthRow(extraTable, 10, "Nhãn hiệu:", txtDefaultVehicleBrandName, labelFont, textFont);
-            AddFullWidthRow(extraTable, 11, "Màu sắc:", txtDefaultVehicleColor, labelFont, textFont);
 
             // Checkbox ẩn/hiện kiểm tra xác suất
             chkHideInspection.Text = "Ẩn phần kiểm tra xác suất";
@@ -398,7 +395,7 @@ namespace Lyhyka.Forms
                 extraTable.RowStyles[i].Height = show ? 25F : 0F;
             }
 
-            extraPanel.Height = show ? 340 : 190;
+            extraPanel.Height = show ? 315 : 165;
         }
 
         private void AddSettingRow(TableLayoutPanel table, int row, string label1Text, TextBox txt1, string label2Text, TextBox txt2, Font labelFont, Font textFont)
@@ -526,7 +523,6 @@ namespace Lyhyka.Forms
                     // Thông tin xe mặc định
                     brand.CertificateNumber = txtDefaultCertificateNumber.Text.Trim();
                     brand.VehicleBrandName = txtDefaultVehicleBrandName.Text.Trim();
-                    brand.VehicleColor = txtDefaultVehicleColor.Text.Trim();
 
                     // Per-direction deviation - HB
                     brand.LightDeviationLeftMin = ToFloat(txtHBLeftMin.Text);

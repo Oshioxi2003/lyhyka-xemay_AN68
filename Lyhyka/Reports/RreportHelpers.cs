@@ -380,13 +380,13 @@ namespace Lyhyka.Reports
             bool sideSlipResult = GlobalFunctions.CheckStandard(testData.SlideSlip, brand.SlideSlipMin, brand.SlideSlipMax);
             bool brakeFrontResult = testData.BrakeForceFront >= brand.BrakeForceFrontMin;
             bool brakeRearResult = testData.BrakeForceRear >= brand.BrakeForceRearMin;
-            bool brakeResult = brakeFrontResult && brakeRearResult;
             bool brakeSumResult = (float)sumBrake >= brand.BrakeForceSumMin;
+            bool brakeResult = brakeFrontResult && brakeRearResult && brakeSumResult;
             bool speedDeviceResult = GlobalFunctions.CheckStandard(testData.Speed, brand.SpeedMin, brand.SpeedMax);
             bool speedRealResult = GlobalFunctions.CheckStandard(testData.RealSpeed, brand.SpeedMin, brand.SpeedMax);
             bool speedResult = speedDeviceResult && speedRealResult;
             bool whistleResult = GlobalFunctions.CheckStandard(testData.Whistle, brand.WhistleMin, brand.WhistleMax);
-            bool noiseResult = GlobalFunctions.CheckStandard(testData.Noise, brand.NoiseMin, brand.NoiseMax);
+            bool noiseResult = GlobalVariables.IsElectricMotorbike ? true : GlobalFunctions.CheckStandard(testData.Noise, brand.NoiseMin, brand.NoiseMax);
 
 
             bool hbIntensityResult = testData.LongRangeLightIntensity >= brand.LongRangeLightIntensityMin;
@@ -394,19 +394,20 @@ namespace Lyhyka.Reports
             bool hbUDResult = CheckLightDeviation(testData.LightDeviationUD, brand.LightDeviationUpMin, brand.LightDeviationUpMax, brand.LightDeviationDownMin, brand.LightDeviationDownMax, brand.LightDeviationUDMin, brand.LightDeviationUDMax);
             bool headLightResult = hbIntensityResult && hbLRResult && hbUDResult;
 
-            bool lbIntensityResult = testData.LongRangeNearLightIntensity >= brand.LongRangeNearLightIntensityMin;
-            bool lbLRResult = CheckLightDeviation(testData.NearLightDeviationLR, brand.NearLightDeviationLeftMin, brand.NearLightDeviationLeftMax, brand.NearLightDeviationRightMin, brand.NearLightDeviationRightMax, brand.NearLightDeviationLRMin, brand.NearLightDeviationLRMax);
-            bool lbUDResult = CheckLightDeviation(testData.NearLightDeviationUD, brand.NearLightDeviationUpMin, brand.NearLightDeviationUpMax, brand.NearLightDeviationDownMin, brand.NearLightDeviationDownMax, brand.NearLightDeviationUDMin, brand.NearLightDeviationUDMax);
+            bool lbIntensityResult = !RS232Manager.ShowLowBeamLightIntensity || brand.LongRangeNearLightIntensityMin == 0 || testData.LongRangeNearLightIntensity >= brand.LongRangeNearLightIntensityMin;
+            bool lbLRResult = !RS232Manager.ShowLowBeamLightDeviationLR || (brand.NearLightDeviationLeftMin == 0 && brand.NearLightDeviationLeftMax == 0 && brand.NearLightDeviationRightMin == 0 && brand.NearLightDeviationRightMax == 0 && brand.NearLightDeviationLRMin == 0 && brand.NearLightDeviationLRMax == 0) || CheckLightDeviation(testData.NearLightDeviationLR, brand.NearLightDeviationLeftMin, brand.NearLightDeviationLeftMax, brand.NearLightDeviationRightMin, brand.NearLightDeviationRightMax, brand.NearLightDeviationLRMin, brand.NearLightDeviationLRMax);
+            bool lbUDResult = (brand.NearLightDeviationUpMin == 0 && brand.NearLightDeviationUpMax == 0 && brand.NearLightDeviationDownMin == 0 && brand.NearLightDeviationDownMax == 0 && brand.NearLightDeviationUDMin == 0 && brand.NearLightDeviationUDMax == 0) || CheckLightDeviation(testData.NearLightDeviationUD, brand.NearLightDeviationUpMin, brand.NearLightDeviationUpMax, brand.NearLightDeviationDownMin, brand.NearLightDeviationDownMax, brand.NearLightDeviationUDMin, brand.NearLightDeviationUDMax);
             bool nearLighResult = lbIntensityResult && lbLRResult && lbUDResult;
             bool hcResult = GlobalVariables.IsElectricMotorbike ? true : GlobalFunctions.CheckStandard(testData.HC, brand.HCMin, brand.HCMax);
             bool coResult = GlobalVariables.IsElectricMotorbike ? true : GlobalFunctions.CheckStandard(testData.CO, brand.COMin, brand.COMax);
 
-            // Kết quả xác suất
-            bool voltageDropResult = GlobalFunctions.CheckStandard(testData.VoltageDrop, brand.VoltageDropMin, brand.VoltageDropMax);
-            bool overCurrentResult = GlobalFunctions.CheckStandard(testData.OverCurrent, brand.OverCurrentMin, brand.OverCurrentMax);
-            bool axleTorqueFrontResult = GlobalFunctions.CheckStandard(testData.AxleTorqueFront, brand.AxleTorqueFrontMin, brand.AxleTorqueFrontMax);
-            bool axleTorqueRearResult = GlobalFunctions.CheckStandard(testData.AxleTorqueRear, brand.AxleTorqueRearMin, brand.AxleTorqueRearMax);
-            bool axleTorqueForkResult = GlobalFunctions.CheckStandard(testData.AxleTorqueFork, brand.AxleTorqueForkMin, brand.AxleTorqueForkMax);
+            // Kết quả xác suất: chỉ kiểm tra nếu xe có đo và không bị ẩn
+            bool voltageDropResult = brand.IsHideInspectionSection || testData.VoltageDrop == 0 || (brand.VoltageDropMin == 0 && brand.VoltageDropMax == 0) || GlobalFunctions.CheckStandard(testData.VoltageDrop, brand.VoltageDropMin, brand.VoltageDropMax);
+            bool overCurrentResult = brand.IsHideInspectionSection || testData.OverCurrent == 0 || (brand.OverCurrentMin == 0 && brand.OverCurrentMax == 0) || GlobalFunctions.CheckStandard(testData.OverCurrent, brand.OverCurrentMin, brand.OverCurrentMax);
+            // Kết quả lực siết: chỉ kiểm tra nếu có bật kiểm tra lực siết
+            bool axleTorqueFrontResult = !RS232Manager.ShowTorqueCheck || (brand.AxleTorqueFrontMin == 0 && brand.AxleTorqueFrontMax == 0) || GlobalFunctions.CheckStandard(testData.AxleTorqueFront, brand.AxleTorqueFrontMin, brand.AxleTorqueFrontMax);
+            bool axleTorqueRearResult = !RS232Manager.ShowTorqueCheck || (brand.AxleTorqueRearMin == 0 && brand.AxleTorqueRearMax == 0) || GlobalFunctions.CheckStandard(testData.AxleTorqueRear, brand.AxleTorqueRearMin, brand.AxleTorqueRearMax);
+            bool axleTorqueForkResult = !RS232Manager.ShowTorqueCheck || (brand.AxleTorqueForkMin == 0 && brand.AxleTorqueForkMax == 0) || GlobalFunctions.CheckStandard(testData.AxleTorqueFork, brand.AxleTorqueForkMin, brand.AxleTorqueForkMax);
 
             reportRow["SideSlipResult"] = sideSlipResult;
             reportRow["BrakeResult"] = brakeResult;
@@ -537,11 +538,11 @@ namespace Lyhyka.Reports
             }
             if (GlobalVariables.IsElectricMotorbike)
             {
-                reportRow["FinalResult"] = sideSlipResult && brakeResult && speedResult && whistleResult && noiseResult && headLightResult && nearLighResult && voltageDropResult && overCurrentResult && axleTorqueFrontResult && axleTorqueRearResult && axleTorqueForkResult;
+                reportRow["FinalResult"] = sideSlipResult && brakeResult && speedResult && whistleResult && headLightResult && nearLighResult && voltageDropResult && overCurrentResult && axleTorqueFrontResult && axleTorqueRearResult && axleTorqueForkResult;
             }
             else
             {
-                reportRow["FinalResult"] = sideSlipResult && brakeResult && speedResult && whistleResult && noiseResult && headLightResult && nearLighResult && coResult && hcResult;
+                reportRow["FinalResult"] = sideSlipResult && brakeResult && speedResult && whistleResult && noiseResult && headLightResult && nearLighResult && coResult && hcResult && axleTorqueFrontResult && axleTorqueRearResult;
             }
             reportDataTable.Rows.Add(reportRow);
 
