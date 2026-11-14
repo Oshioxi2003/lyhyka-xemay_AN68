@@ -1,4 +1,4 @@
-﻿using DevExpress.XtraGauges.Core.Model;
+using DevExpress.XtraGauges.Core.Model;
 using Lyhyka.Core;
 using System;
 using System.Collections.Generic;
@@ -25,25 +25,26 @@ namespace Lyhyka.UCT
                 case MenuConstants.Speed:
                     roundingNumber = 1;
                     headerLabelUC.Title = "ĐO TỐC ĐỘ";
-                    titleAndValueUC1.Title = "Tốc độ(Km/h)";
-                    titleAndValueUC2.Title = "Thời gian(s)";
+                    titleAndValueUC1.Title = "Tốc độ (km/h)";
+                    titleAndValueUC2.Title = "Thời gian (s)";
                     SetRange(0, GlobalVariables.SelectedBrand.SpeedMin, GlobalVariables.SelectedBrand.SpeedMax);
                     break;
                 case MenuConstants.BrakeForce:
                     roundingNumber = 0;
                     headerLabelUC.Title = "ĐO LỰC PHANH";
-                    titleAndValueUC1.Title = "Lực phanh trước(N)";
-                    titleAndValueUC2.Title = "Lực phanh sau(N)";
+                    titleAndValueUC1.Title = "Lực phanh trước (N)";
+                    titleAndValueUC2.Title = "Lực phanh sau (N)";
                     SetRange(0, GlobalVariables.SelectedBrand.BrakeForceFrontMin, GlobalVariables.SelectedBrand.BrakeForceFrontMax);
                     break;
                 case MenuConstants.Weight:
                     roundingNumber = 0;
                     headerLabelUC.Title = "ĐO TRỌNG LƯỢNG";
-                    titleAndValueUC1.Title = "Bánh trước(Kg)";
-                    titleAndValueUC2.Title = "Bánh sau(Kg)";
+                    titleAndValueUC1.Title = "Bánh trước (kg)";
+                    titleAndValueUC2.Title = "Bánh sau (kg)";
                     SetRange(0, GlobalVariables.SelectedBrand.WeightFrontMin, GlobalVariables.SelectedBrand.WeightFrontMax);
                     break;
             }
+            SetValue(0);
         }
         public void UpdateRange(string buttonName)
         {
@@ -83,11 +84,11 @@ namespace Lyhyka.UCT
         {
             try
             {
-                if(value<0)
+                if (value < 0)
                 {
                     value = 0;
-                }    
-                this.Invoke((MethodInvoker)(() =>
+                }
+                Action updateAction = () =>
                 {
                     arcScaleComponent.Value = value;
                     lblValue.Text = Math.Round(value, roundingNumber).ToString();
@@ -97,13 +98,21 @@ namespace Lyhyka.UCT
                         {
                             var color = ((DevExpress.XtraGauges.Core.Drawing.SolidBrushObject)((DevExpress.XtraGauges.Core.Model.BaseRange)range).AppearanceRange.ContentBrush).Color;
 
-                            lblValue.AppearanceText.TextBrush =
-                                 this.lblValue.AppearanceText.TextBrush = new DevExpress.XtraGauges.Core.Drawing.SolidBrushObject("Color:#" + color.Name);
+                            lblValue.AppearanceText.TextBrush = new DevExpress.XtraGauges.Core.Drawing.SolidBrushObject(color);
 
                             break;
                         }
                     }
-                }));
+                };
+
+                if (this.IsHandleCreated && this.InvokeRequired)
+                {
+                    this.Invoke((MethodInvoker)(() => updateAction()));
+                }
+                else
+                {
+                    updateAction();
+                }
             }
             catch (Exception)
             {

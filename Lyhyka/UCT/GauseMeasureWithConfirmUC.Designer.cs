@@ -1,4 +1,4 @@
-﻿using DevExpress.XtraGauges.Core.Model;
+using DevExpress.XtraGauges.Core.Model;
 
 namespace Lyhyka.UCT
 {
@@ -171,16 +171,16 @@ namespace Lyhyka.UCT
             arcScaleRange2,
             arcScaleRange3});
             this.arcScaleComponent.StartAngle = -225F;
-            this.arcScaleComponent.Value = 22F;
+            this.arcScaleComponent.Value = 0F;
             // 
             // lblValue
             // 
             this.lblValue.AppearanceText.DXFont = new DevExpress.Drawing.DXFont("Tahoma", 36F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.lblValue.AppearanceText.TextBrush = new DevExpress.XtraGauges.Core.Drawing.SolidBrushObject("Color:#DC3235");
+            this.lblValue.AppearanceText.TextBrush = new DevExpress.XtraGauges.Core.Drawing.SolidBrushObject("Color:#FFBF00");
             this.lblValue.Name = "circularGauge1_Label1";
             this.lblValue.Position = new DevExpress.XtraGauges.Core.Base.PointF2D(125F, 180F);
             this.lblValue.Size = new System.Drawing.SizeF(250F, 25F);
-            this.lblValue.Text = "20";
+            this.lblValue.Text = "0";
             this.lblValue.ZOrder = -1001;
             // 
             // arcScaleNeedleComponent1
